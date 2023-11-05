@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ecom.pojo">
+	<class name="Customer" table="customer">
+		<id name="pkCustomerId" column="pk_customer_id"
+			type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		<property name="customerName" column="customer_name"
+			type="string"></property>
+		<property name="contactName" column="contact_name"
+			type="string"></property>
+		<property name="address" column="address" type="string"></property>
+		<property name="city" column="city" type="string"></property>
+		<property name="postalCode" column="postal_code"
+			type="string"></property>
+		<property name="country" column="country" type="string"></property>
+		<property name="isDeleted" column="is_deleted"
+			type="java.lang.Integer"></property>
+	</class>
+</hibernate-mapping>
