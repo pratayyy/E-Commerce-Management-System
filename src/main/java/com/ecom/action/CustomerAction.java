@@ -13,6 +13,9 @@ import com.ecom.dto.CustomerDto;
 import com.ecom.manager.CustomerManager;
 import com.ecom.pojo.Customer;
 
+/**
+ * @author pratay.roy
+ */
 public class CustomerAction {
 	private Customer customer;
 	private List<Customer> customers;
@@ -47,6 +50,9 @@ public class CustomerAction {
 		this.customerManager = customerManager;
 	}
 
+	/**
+	 * Constructor to get beans and response body initializations
+	 */
 	public CustomerAction() {
 		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")) {
 			customerManager = (CustomerManager) context.getBean("customerManager");
@@ -57,6 +63,11 @@ public class CustomerAction {
 		response = ServletActionContext.getResponse();
 	}
 
+	/**
+	 * Method to set response when receiving a list of customers as output
+	 * 
+	 * @param customers
+	 */
 	public void handleRequest(List<CustomerDto> customers) {
 		if (customers == null) {
 			root.put("message", customerManager.getErrorMessage());
@@ -66,6 +77,11 @@ public class CustomerAction {
 		}
 	}
 
+	/**
+	 * Method to get all customers
+	 * 
+	 * @return success
+	 */
 	public String readAll() {
 		List<CustomerDto> customers = customerManager.getAllCustomers();
 		handleRequest(customers);

@@ -11,6 +11,9 @@ import org.hibernate.cfg.Configuration;
 import com.ecom.dao.CustomerDao;
 import com.ecom.pojo.Customer;
 
+/**
+ * @author pratay.roy
+ */
 public class CustomerDaoImpl implements CustomerDao {
 	private SessionFactory sessionFactory;
 	private Session session;
@@ -19,6 +22,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	private Configuration cfg;
 	private String errorMessage;
 
+	// Constructor to set the hibernate configs from configuration file
 	public CustomerDaoImpl() {
 		cfg = new Configuration();
 		cfg.configure("hibernate.cfg.xml");
