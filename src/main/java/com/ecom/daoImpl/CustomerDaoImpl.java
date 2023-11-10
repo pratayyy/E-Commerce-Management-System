@@ -56,6 +56,35 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
+	public Customer getCustomerById(Integer customerId) {
+		Customer customer = new Customer();
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getCustomerByIdQuery = new StringBuilder("FROM Customer c");
+			getCustomerByIdQuery.append(" WHERE c.isDeleted = :isDeleted");
+			getCustomerByIdQuery.append(" AND c.pkCustomerId = :pkCustomerId");
+			query = session.createQuery(getCustomerByIdQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameter("pkCustomerId", customerId);
+			customer = (Customer) query.uniqueResult();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return customer;
+	}
+	
+	@Override
 	public String getErrorMessage() {
 		return errorMessage;
 	}

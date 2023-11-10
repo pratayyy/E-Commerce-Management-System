@@ -17,7 +17,26 @@ import com.ecom.pojo.Customer;
  * @author pratay.roy
  */
 public class CustomerAction {
+	private Integer customerId;
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
 	private Customer customer;
+
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+
 	private List<Customer> customers;
 
 	public Customer getCustomer() {
@@ -78,6 +97,20 @@ public class CustomerAction {
 	}
 
 	/**
+	 * Method to set response when receiving a customer as output
+	 * 
+	 * @param customer
+	 */
+	public void handleRequest(CustomerDto customer) {
+		if (customer == null) {
+			root.put("message", customerManager.getErrorMessage());
+			response.setStatus(customerManager.getStatusCode());
+		} else {
+			root.put("customer", customer);
+		}
+	}
+
+	/**
 	 * Method to get all customers
 	 * 
 	 * @return success
@@ -85,6 +118,17 @@ public class CustomerAction {
 	public String readAll() {
 		List<CustomerDto> customers = customerManager.getAllCustomers();
 		handleRequest(customers);
+		return "success";
+	}
+
+	/**
+	 * Method to get customer by ID
+	 * 
+	 * @return success
+	 */
+	public String readById() {
+		CustomerDto customer = customerManager.getCustomerById(customerId);
+		handleRequest(customer);
 		return "success";
 	}
 }

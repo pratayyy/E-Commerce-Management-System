@@ -22,5 +22,16 @@
 			</result>
 		</action>
 
+		<!-- Get Customer by ID -->
+		<action name="byid" class="com.ecom.action.CustomerAction"
+			method="readById">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
 	</package>
 </struts>

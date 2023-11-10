@@ -16,6 +16,14 @@ public interface CustomerDao {
 	public List<Customer> getAllCustomers();
 
 	/**
+	 * Method to get customer by customer ID
+	 * 
+	 * @param customerId
+	 * @return customer
+	 */
+	public Customer getCustomerById(Integer customerId);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

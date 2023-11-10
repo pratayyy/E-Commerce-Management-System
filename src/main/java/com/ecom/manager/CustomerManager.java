@@ -16,6 +16,14 @@ public interface CustomerManager {
 	public List<CustomerDto> getAllCustomers();
 
 	/**
+	 * Mehtod to get customer by ID
+	 * 
+	 * @param customerId
+	 * @return customer
+	 */
+	public CustomerDto getCustomerById(Integer customerId);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

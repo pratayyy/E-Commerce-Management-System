@@ -36,6 +36,22 @@ public class CustomerManagerImpl implements CustomerManager {
 	}
 
 	@Override
+	public CustomerDto getCustomerById(Integer customerId) {
+		// Customer ID is not valid
+		if (customerId <= 0 || customerId == null) {
+			statusCode = 400;
+			errorMessage = "Invalid ID";
+		}
+		Customer customer = customerDao.getCustomerById(customerId);
+		// Customer doesnot exist
+		if (customer == null) {
+			statusCode = 404;
+			errorMessage = "Customer with provided ID doesnot exist";
+		}
+		return customer == null ? null : Mapper.customerDtoMapper(customer);
+	}
+
+	@Override
 	public String getErrorMessage() {
 		String daoErrorMessage = customerDao.getErrorMessage();
 		// If there is error show that message else null
