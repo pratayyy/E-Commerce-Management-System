@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ecom.pojo">
+	<class name="Shipper" table="shipper">
+		<id name="pkShipperId" column="pk_shipper_id"
+			type="java.lang.Integer">
+			<generator class="increment" />
+		</id>
+		<property name="shipperName" column="shipper_name"
+			type="string"></property>
+		<property name="phone" column="phone" type="string"></property>
+		<property name="isDeleted" column="is_deleted"
+			type="java.lang.Integer"></property>
+	</class>
+</hibernate-mapping>

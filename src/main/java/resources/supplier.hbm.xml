@@ -4,13 +4,13 @@
 	"-//Hibernate/Hibernate Mapping DTD//EN"
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.ecom.pojo">
-	<class name="Customer" table="customer">
-		<id name="pkCustomerId" column="pk_customer_id"
+<hibernate-mapping package="com.ecom.action.pojo">
+	<class name="Supplier" table="supplier">
+		<id name="pkSupplierId" column="pk_supplier_id"
 			type="java.lang.Integer">
 			<generator class="increment" />
 		</id>
-		<property name="customerName" column="customer_name"
+		<property name="supplierName" column="supplier_name"
 			type="string"></property>
 		<property name="contactName" column="contact_name"
 			type="string"></property>
@@ -19,6 +19,7 @@
 		<property name="postalCode" column="postal_code"
 			type="string"></property>
 		<property name="country" column="country" type="string"></property>
+		<property name="phone" column="phone" type="string"></property>
 		<property name="isDeleted" column="is_deleted"
 			type="java.lang.Integer"></property>
 	</class>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ecom.pojo">
+	<class name="Order" table="orders">
+		<id name="pkOrderId" column="pk_order_id" type="java.lang.Integer">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="customer" class="Customer" lazy="false">
+			<column name="fk_customer_id" not-null="true"></column>
+		</many-to-one>
+		<many-to-one name="employee" class="Employee" lazy="false">
+			<column name="fk_employee_id" not-null="true"></column>
+		</many-to-one>
+		<many-to-one name="shipper" class="Shipper" lazy="false">
+			<column name="fk_shipper_id" not-null="true"></column>
+		</many-to-one>
+		<property name="orderDate" column="order_date" type="date"></property>
+		<property name="isDeleted" column="is_deleted"
+			type="java.lang.Integer"></property>
+	</class>
+</hibernate-mapping>

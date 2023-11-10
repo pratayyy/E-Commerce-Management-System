@@ -16,6 +16,13 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<!-- Table Mappings -->
+		<mapping resource="resources/category.hbm.xml" />
 		<mapping resource="resources/customer.hbm.xml" />
+		<mapping resource="resources/employee.hbm.xml" />
+		<mapping resource="resources/order.hbm.xml" />
+		<mapping resource="resources/orderDetail.hbm.xml" />
+		<mapping resource="resources/product.hbm.xml" />
+		<mapping resource="resources/shipper.hbm.xml" />
+		<mapping resource="resources/supplier.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
