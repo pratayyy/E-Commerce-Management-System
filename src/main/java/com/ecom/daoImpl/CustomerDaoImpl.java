@@ -19,24 +19,25 @@ public class CustomerDaoImpl implements CustomerDao {
 	private Session session;
 	private Transaction transaction;
 	private Query query;
-	private Configuration cfg;
+	private Configuration configuration;
 	private String errorMessage;
 
 	// Constructor to set the hibernate configs from configuration file
 	public CustomerDaoImpl() {
-		cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
+		configuration = new Configuration();
+		configuration.configure("hibernate.cfg.xml");
 	}
 
 	@Override
 	public List<Customer> getAllCustomers() {
 		List<Customer> customers = null;
-		sessionFactory = cfg.buildSessionFactory();
+		sessionFactory = configuration.buildSessionFactory();
 		session = sessionFactory.openSession();
 		transaction = session.beginTransaction();
 		try {
-			String hql = "FROM Customer c WHERE c.isDeleted = :isDeleted";
-			query = session.createQuery(hql);
+			StringBuilder getAllCustomerQuery = new StringBuilder("FROM Customer c");
+			getAllCustomerQuery.append(" WHERE c.isDeleted = :isDeleted");
+			query = session.createQuery(getAllCustomerQuery.toString());
 			query.setParameter("isDeleted", -1);
 			customers = query.list();
 		} catch (Exception e) {

@@ -14,7 +14,6 @@ public interface CustomerDao {
 	 * @return list of customers
 	 */
 	public List<Customer> getAllCustomers();
-	
 
 	/**
 	 * Method to get response body
