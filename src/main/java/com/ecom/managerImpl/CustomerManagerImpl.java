@@ -31,6 +31,10 @@ public class CustomerManagerImpl implements CustomerManager {
 		List<Customer> customers = customerDao.getAllCustomers();
 		// If there are customer(s) present then map them to the customerDTO to get the
 		// required values
+		if (customers.isEmpty()) {
+			statusCode = 404;
+			errorMessage = "Customers doesnot exist";
+		}
 		return customers == null ? null
 				: customers.stream().map(customer -> Mapper.customerDtoMapper(customer)).collect(Collectors.toList());
 	}
@@ -49,6 +53,35 @@ public class CustomerManagerImpl implements CustomerManager {
 			errorMessage = "Customer with provided ID doesnot exist";
 		}
 		return customer == null ? null : Mapper.customerDtoMapper(customer);
+	}
+
+	@Override
+	public List<CustomerDto> getAllCustomersByCountries(List<String> countries) {
+		// Customers not provided
+		if (countries == null || countries.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "Countries list is empty";
+			return null;
+		}
+		List<Customer> customers = customerDao.getAllCustomersByCountries(countries);
+		// No customers are available in the seleted countries
+		if (customers.isEmpty()) {
+			statusCode = 404;
+			errorMessage = "Customers doesnot exist in these countries";
+		}
+		return customers == null ? null
+				: customers.stream().map(customer -> Mapper.customerDtoMapper(customer)).collect(Collectors.toList());
+	}
+
+	@Override
+	public Integer addNewCustomer(Customer customer) {
+		// Customer entries are null
+		if (customer == null) {
+			statusCode = 400;
+			errorMessage = "Customer object null";
+			return 0;
+		}
+		return customerDao.addNewCustomer(customer);
 	}
 
 	@Override

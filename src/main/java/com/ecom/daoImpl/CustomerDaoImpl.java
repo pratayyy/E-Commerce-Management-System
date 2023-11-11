@@ -21,6 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	private Query query;
 	private Configuration configuration;
 	private String errorMessage;
+	private Integer result = 0;
 
 	// Constructor to set the hibernate configs from configuration file
 	public CustomerDaoImpl() {
@@ -83,7 +84,53 @@ public class CustomerDaoImpl implements CustomerDao {
 		}
 		return customer;
 	}
-	
+
+	@Override
+	public List<Customer> getAllCustomersByCountries(List<String> countries) {
+		List<Customer> customers = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getAllCustomersByCountriesQuery = new StringBuilder("FROM Customer c");
+			getAllCustomersByCountriesQuery.append(" WHERE c.isDeleted = :isDeleted");
+			getAllCustomersByCountriesQuery.append(" AND c.country IN (:country)");
+			query = session.createQuery(getAllCustomersByCountriesQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameterList("country", countries);
+			customers = query.list();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return customers;
+	}
+
+	@Override
+	public Integer addNewCustomer(Customer customer) {
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			customer.setIsDeleted(-1);
+			session.save(customer);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	@Override
 	public String getErrorMessage() {
 		return errorMessage;

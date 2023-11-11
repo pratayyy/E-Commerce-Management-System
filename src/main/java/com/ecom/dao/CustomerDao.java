@@ -24,6 +24,21 @@ public interface CustomerDao {
 	public Customer getCustomerById(Integer customerId);
 
 	/**
+	 * Method to get list of customers by country names
+	 * 
+	 * @param countries
+	 * @return customers
+	 */
+	public List<Customer> getAllCustomersByCountries(List<String> countries);
+	
+	/**
+	 * Method to add a new customer
+	 * @param customer
+	 * @return result
+	 */
+	public Integer addNewCustomer(Customer customer);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

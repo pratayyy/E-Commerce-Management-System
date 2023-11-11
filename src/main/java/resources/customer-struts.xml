@@ -5,9 +5,10 @@
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
+	<!-- Customer APIs -->
 	<constant name="struts.devMode" value="true" />
 
-	<!-- Customer APIs -->
+	<!-- GET Request -->
 	<package namespace="/customer/read" name="readCustomer"
 		extends="json-default">
 
@@ -25,6 +26,34 @@
 		<!-- Get Customer by ID -->
 		<action name="byid" class="com.ecom.action.CustomerAction"
 			method="readById">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Get All Customers by Country Names -->
+		<action name="bycountries"
+			class="com.ecom.action.CustomerAction" method="readByCountries">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+	</package>
+
+	<!-- PUT Request -->
+	<package namespace="/customer/add" name="addCustomer"
+		extends="json-default">
+
+		<!-- Add New Customer -->
+		<action name="single" class="com.ecom.action.CustomerAction"
+			method="addCustomer">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>

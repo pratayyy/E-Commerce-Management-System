@@ -27,6 +27,16 @@ public class CustomerAction {
 		this.customerId = customerId;
 	}
 
+	private List<String> countries;
+
+	public List<String> getCountries() {
+		return countries;
+	}
+
+	public void setCountries(List<String> countries) {
+		this.countries = countries;
+	}
+
 	private Customer customer;
 
 	public List<Customer> getCustomers() {
@@ -87,7 +97,7 @@ public class CustomerAction {
 	 * 
 	 * @param customers
 	 */
-	public void handleRequest(List<CustomerDto> customers) {
+	public void handleResponse(List<CustomerDto> customers) {
 		if (customers == null) {
 			root.put("message", customerManager.getErrorMessage());
 			response.setStatus(customerManager.getStatusCode());
@@ -101,12 +111,25 @@ public class CustomerAction {
 	 * 
 	 * @param customer
 	 */
-	public void handleRequest(CustomerDto customer) {
+	public void handleResponse(CustomerDto customer) {
 		if (customer == null) {
 			root.put("message", customerManager.getErrorMessage());
 			response.setStatus(customerManager.getStatusCode());
 		} else {
 			root.put("customer", customer);
+		}
+	}
+
+	/**
+	 * Method to set response on result type
+	 * 
+	 * @param result
+	 */
+	public void handleResponse(int result) {
+		root.put("result", result);
+		if (result == 0) {
+			root.put("message", customerManager.getErrorMessage());
+			response.setStatus(customerManager.getStatusCode());
 		}
 	}
 
@@ -117,7 +140,7 @@ public class CustomerAction {
 	 */
 	public String readAll() {
 		List<CustomerDto> customers = customerManager.getAllCustomers();
-		handleRequest(customers);
+		handleResponse(customers);
 		return "success";
 	}
 
@@ -128,7 +151,24 @@ public class CustomerAction {
 	 */
 	public String readById() {
 		CustomerDto customer = customerManager.getCustomerById(customerId);
-		handleRequest(customer);
+		handleResponse(customer);
+		return "success";
+	}
+
+	/**
+	 * Method to get all customers using country names
+	 * 
+	 * @return success
+	 */
+	public String readByCountries() {
+		List<CustomerDto> customers = customerManager.getAllCustomersByCountries(countries);
+		handleResponse(customers);
+		return "success";
+	}
+
+	public String addCustomer() {
+		Integer result = customerManager.addNewCustomer(customer);
+		handleResponse(result);
 		return "success";
 	}
 }
