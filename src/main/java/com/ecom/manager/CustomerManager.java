@@ -66,6 +66,14 @@ public interface CustomerManager {
 	public Integer deleteCustomerById(Integer customerId);
 
 	/**
+	 * Method to delete all customers by given country names
+	 * 
+	 * @param countries
+	 * @return result
+	 */
+	public Integer deleteCustomersByCountries(List<String> countries);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

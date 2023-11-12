@@ -112,6 +112,22 @@ public class CustomerManagerImpl implements CustomerManager {
 	}
 
 	@Override
+	public Integer deleteCustomersByCountries(List<String> countries) {
+		// Empty list of customer
+		if (countries.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "Customer list empty";
+			return 0;
+		}
+		Integer result = customerDao.deleteCustomersByCountries(countries);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Customer doesnot exist for the given countries";
+		}
+		return result;
+	}
+
+	@Override
 	public String getErrorMessage() {
 		String daoErrorMessage = customerDao.getErrorMessage();
 		// If there is error show that message else null

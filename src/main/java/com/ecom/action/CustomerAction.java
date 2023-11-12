@@ -209,4 +209,15 @@ public class CustomerAction {
 		handleResponse(result);
 		return "success";
 	}
+
+	/**
+	 * Method to delete all customers by given country names
+	 * 
+	 * @return success
+	 */
+	public String deleteByCountries() {
+		Integer result = customerManager.deleteCustomersByCountries(countries);
+		handleResponse(result);
+		return "success";
+	}
 }

@@ -34,7 +34,7 @@
 			</result>
 		</action>
 
-		<!-- Get All Customers by Country Names -->
+		<!-- Get Customer(s) by Country Name(s) -->
 		<action name="bycountries"
 			class="com.ecom.action.CustomerAction" method="readByCountries">
 			<interceptor-ref name="json">
@@ -96,6 +96,17 @@
 		<!-- Delete Existing Customer -->
 		<action name="byid" class="com.ecom.action.CustomerAction"
 			method="deleteById">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Delete Existing Customer(s) by Country name(s) -->
+		<action name="bycountries"
+			class="com.ecom.action.CustomerAction" method="deleteByCountries">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>
