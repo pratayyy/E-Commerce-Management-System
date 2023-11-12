@@ -58,6 +58,14 @@ public interface CustomerManager {
 	public Integer updateCustomer(Integer customerId, Customer customerNewValues);
 
 	/**
+	 * Method to delete a existing customer using Customer ID
+	 * 
+	 * @param customerId
+	 * @return result
+	 */
+	public Integer deleteCustomerById(Integer customerId);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

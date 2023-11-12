@@ -175,10 +175,10 @@ public class CustomerDaoImpl implements CustomerDao {
 		session = sessionFactory.openSession();
 		transaction = session.beginTransaction();
 		try {
-			StringBuilder getCustomerToUpdate = new StringBuilder("FROM Customer c");
-			getCustomerToUpdate.append(" WHERE isDeleted = :isDeleted");
-			getCustomerToUpdate.append(" AND pkCustomerId = :pkCustomerId");
-			query = session.createQuery(getCustomerToUpdate.toString());
+			StringBuilder getCustomerToUpdateQuery = new StringBuilder("FROM Customer c");
+			getCustomerToUpdateQuery.append(" WHERE isDeleted = :isDeleted");
+			getCustomerToUpdateQuery.append(" AND pkCustomerId = :pkCustomerId");
+			query = session.createQuery(getCustomerToUpdateQuery.toString());
 			query.setParameter("isDeleted", -1);
 			query.setParameter("pkCustomerId", customerId);
 			customer = (Customer) query.uniqueResult();
@@ -195,6 +195,39 @@ public class CustomerDaoImpl implements CustomerDao {
 			if (customerNewValues.getCountry() != null)
 				customer.setCountry(customerNewValues.getCountry());
 			session.update(customer);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public Integer deleteCustomerById(Integer customerId) {
+		Customer customer = new Customer();
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getCustomerToDeleteQuery = new StringBuilder("FROM Customer c");
+			getCustomerToDeleteQuery.append(" WHERE isDeleted = :isDeleted");
+			getCustomerToDeleteQuery.append(" AND pkCustomerId = :pkCustomerId");
+			query = session.createQuery(getCustomerToDeleteQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameter("pkCustomerId", customerId);
+			customer = (Customer) query.uniqueResult();
+			customer.setIsDeleted(1);
 			transaction.commit();
 			result = 1;
 		} catch (Exception e) {

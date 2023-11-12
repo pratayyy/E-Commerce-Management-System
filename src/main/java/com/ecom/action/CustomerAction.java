@@ -198,4 +198,15 @@ public class CustomerAction {
 		handleResponse(result);
 		return "success";
 	}
+
+	/**
+	 * Method to delete customer using customer ID
+	 * 
+	 * @return success
+	 */
+	public String deleteById() {
+		Integer result = customerManager.deleteCustomerById(customerId);
+		handleResponse(result);
+		return "success";
+	}
 }
