@@ -47,13 +47,24 @@
 
 	</package>
 
-	<!-- PUT Request -->
+	<!-- POST Request -->
 	<package namespace="/customer/add" name="addCustomer"
 		extends="json-default">
 
 		<!-- Add New Customer -->
 		<action name="single" class="com.ecom.action.CustomerAction"
 			method="addCustomer">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Add New Customer(s) -->
+		<action name="multiple" class="com.ecom.action.CustomerAction"
+			method="addCustomers">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>

@@ -166,8 +166,24 @@ public class CustomerAction {
 		return "success";
 	}
 
+	/**
+	 * Method to add new customer
+	 * 
+	 * @return success
+	 */
 	public String addCustomer() {
 		Integer result = customerManager.addNewCustomer(customer);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to add new customer(s)
+	 * 
+	 * @return success
+	 */
+	public String addCustomers() {
+		Integer result = customerManager.addNewCustomers(customers);
 		handleResponse(result);
 		return "success";
 	}

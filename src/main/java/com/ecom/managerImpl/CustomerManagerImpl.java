@@ -85,6 +85,17 @@ public class CustomerManagerImpl implements CustomerManager {
 	}
 
 	@Override
+	public Integer addNewCustomers(List<Customer> customers) {
+		// Empty list of customers
+		if (customers.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "Customer list empty";
+			return 0;
+		}
+		return customerDao.addNewCustomers(customers);
+	}
+
+	@Override
 	public String getErrorMessage() {
 		String daoErrorMessage = customerDao.getErrorMessage();
 		// If there is error show that message else null

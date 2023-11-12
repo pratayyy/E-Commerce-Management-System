@@ -41,6 +41,14 @@ public interface CustomerManager {
 	public Integer addNewCustomer(Customer customer);
 
 	/**
+	 * Method to add new customer(s)
+	 * 
+	 * @param customers
+	 * @return result
+	 */
+	public Integer addNewCustomers(List<Customer> customers);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage
