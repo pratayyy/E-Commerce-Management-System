@@ -147,6 +147,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		transaction = session.beginTransaction();
 		try {
 			for (Customer customer : customers) {
+				customer.setIsDeleted(-1);
 				session.save(customer);
 				result += 1;
 			}
