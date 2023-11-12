@@ -35,22 +35,23 @@ public class CustomerManagerImpl implements CustomerManager {
 			statusCode = 404;
 			errorMessage = "Customers doesnot exist";
 		}
-		return customers == null ? null
+		return customers.isEmpty() ? null
 				: customers.stream().map(customer -> Mapper.customerDtoMapper(customer)).collect(Collectors.toList());
 	}
 
 	@Override
 	public CustomerDto getCustomerById(Integer customerId) {
 		// Customer ID is not valid
-		if (customerId <= 0 || customerId == null) {
+		if (customerId <= 0) {
 			statusCode = 400;
-			errorMessage = "Invalid ID";
+			errorMessage = "Invalid Customer ID";
+			return null;
 		}
 		Customer customer = customerDao.getCustomerById(customerId);
 		// Customer doesnot exist
 		if (customer == null) {
 			statusCode = 404;
-			errorMessage = "Customer with provided ID doesnot exist";
+			errorMessage = "Customer with provided Customer ID doesnot exist";
 		}
 		return customer == null ? null : Mapper.customerDtoMapper(customer);
 	}
@@ -69,16 +70,16 @@ public class CustomerManagerImpl implements CustomerManager {
 			statusCode = 404;
 			errorMessage = "Customers doesnot exist in these countries";
 		}
-		return customers == null ? null
+		return customers.isEmpty() ? null
 				: customers.stream().map(customer -> Mapper.customerDtoMapper(customer)).collect(Collectors.toList());
 	}
 
 	@Override
 	public Integer addNewCustomer(Customer customer) {
 		// Customer entries are null
-		if (customer == null) {
+		if (customer.getCustomerName() == null || customer.getContactName() == null || customer.getCountry() == null) {
 			statusCode = 400;
-			errorMessage = "Customer object null";
+			errorMessage = "Customer entries are not defined";
 			return 0;
 		}
 		return customerDao.addNewCustomer(customer);
@@ -89,7 +90,7 @@ public class CustomerManagerImpl implements CustomerManager {
 		// Empty list of customers
 		if (customers.isEmpty()) {
 			statusCode = 400;
-			errorMessage = "Customer list empty";
+			errorMessage = "Customers list is empty";
 			return 0;
 		}
 		return customerDao.addNewCustomers(customers);
@@ -97,7 +98,21 @@ public class CustomerManagerImpl implements CustomerManager {
 
 	@Override
 	public Integer updateCustomer(Integer customerId, Customer customerNewValues) {
+		if (customerId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Customer ID";
+			return 0;
+		}
+		if (customerNewValues.getCustomerName() == null && customerNewValues.getContactName() == null
+				&& customerNewValues.getAddress() == null && customerNewValues.getCountry() == null
+				&& customerNewValues.getCity() == null && customerNewValues.getPostalCode() == null) {
+			statusCode = 400;
+			errorMessage = "No entries to update provided";
+			return 0;
+		}
 		if (customerDao.getCustomerById(customerId) == null) {
+			statusCode = 404;
+			errorMessage = "Customer with provided Customer ID doesnot exist";
 			return 0;
 		}
 		return customerDao.updateCustomer(customerId, customerNewValues);
@@ -105,7 +120,14 @@ public class CustomerManagerImpl implements CustomerManager {
 
 	@Override
 	public Integer deleteCustomerById(Integer customerId) {
+		if (customerId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Customer ID";
+			return 0;
+		}
 		if (customerDao.getCustomerById(customerId) == null) {
+			statusCode = 404;
+			errorMessage = "Customer with provided Customer ID doesnot exist";
 			return 0;
 		}
 		return customerDao.deleteCustomerById(customerId);
@@ -113,10 +135,10 @@ public class CustomerManagerImpl implements CustomerManager {
 
 	@Override
 	public Integer deleteCustomersByCountries(List<String> countries) {
-		// Empty list of customer
+		// Empty list of countries
 		if (countries.isEmpty()) {
 			statusCode = 400;
-			errorMessage = "Customer list empty";
+			errorMessage = "Countries list is empty";
 			return 0;
 		}
 		Integer result = customerDao.deleteCustomersByCountries(countries);
