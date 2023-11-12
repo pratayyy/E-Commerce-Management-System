@@ -187,4 +187,15 @@ public class CustomerAction {
 		handleResponse(result);
 		return "success";
 	}
+
+	/**
+	 * Method to update customer using customer ID and appropriate data
+	 * 
+	 * @return success
+	 */
+	public String updateCustomer() {
+		Integer result = customerManager.updateCustomer(customerId, customer);
+		handleResponse(result);
+		return "success";
+	}
 }

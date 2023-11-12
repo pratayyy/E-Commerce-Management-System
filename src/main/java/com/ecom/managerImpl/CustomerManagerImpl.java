@@ -96,6 +96,14 @@ public class CustomerManagerImpl implements CustomerManager {
 	}
 
 	@Override
+	public Integer updateCustomer(Integer customerId, Customer customerNewValues) {
+		if (customerDao.getCustomerById(customerId) == null) {
+			return 0;
+		}
+		return customerDao.updateCustomer(customerId, customerNewValues);
+	}
+
+	@Override
 	public String getErrorMessage() {
 		String daoErrorMessage = customerDao.getErrorMessage();
 		// If there is error show that message else null

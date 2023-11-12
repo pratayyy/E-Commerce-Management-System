@@ -72,6 +72,22 @@
 				<param name="root">root</param>
 			</result>
 		</action>
+	</package>
+
+	<!-- PATCH Request -->
+	<package namespace="/customer/update" name="updateCustomer"
+		extends="json-default">
+
+		<!-- Update Existing Customer -->
+		<action name="byid" class="com.ecom.action.CustomerAction"
+			method="updateCustomer">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
 
 	</package>
 </struts>

@@ -48,6 +48,15 @@ public interface CustomerDao {
 	public Integer addNewCustomers(List<Customer> customers);
 
 	/**
+	 * Method to update customer using customer ID and appropriate data
+	 * 
+	 * @param customerId
+	 * @param customerNewValues
+	 * @return result
+	 */
+	public Integer updateCustomer(Integer customerId, Customer customerNewValues);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

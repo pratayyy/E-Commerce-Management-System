@@ -169,6 +169,51 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
+	public Integer updateCustomer(Integer customerId, Customer customerNewValues) {
+		Customer customer = new Customer();
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getCustomerToUpdate = new StringBuilder("FROM Customer c");
+			getCustomerToUpdate.append(" WHERE isDeleted = :isDeleted");
+			getCustomerToUpdate.append(" AND pkCustomerId = :pkCustomerId");
+			query = session.createQuery(getCustomerToUpdate.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameter("pkCustomerId", customerId);
+			customer = (Customer) query.uniqueResult();
+			if (customerNewValues.getCustomerName() != null)
+				customer.setCustomerName(customerNewValues.getCustomerName());
+			if (customerNewValues.getContactName() != null)
+				customer.setContactName(customerNewValues.getCustomerName());
+			if (customerNewValues.getAddress() != null)
+				customer.setAddress(customerNewValues.getAddress());
+			if (customerNewValues.getCity() != null)
+				customer.setCity(customerNewValues.getCity());
+			if (customerNewValues.getPostalCode() != null)
+				customer.setPostalCode(customerNewValues.getPostalCode());
+			if (customerNewValues.getCountry() != null)
+				customer.setCountry(customerNewValues.getCountry());
+			session.update(customer);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public String getErrorMessage() {
 		return errorMessage;
 	}
