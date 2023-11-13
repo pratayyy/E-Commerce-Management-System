@@ -5,5 +5,92 @@
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
+	<!-- Employee APIs -->
+	<constant name="struts.devMode" value="true" />
 
+	<!-- GET Request -->
+	<package namespace="employee/read" name="readEmployee"
+		extends="json-default">
+
+		<!-- Get All Employees -->
+		<action name="all" class="com.ecom.action.EmployeeAction"
+			method="readAll">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Get Employee by ID -->
+		<action name="byid" class="com.ecom.action.EmployeeAction"
+			method="readById">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- POST Request -->
+	<package namespace="/employee/add" name="addEmployee"
+		extends="json-default">
+
+		<!-- Add New Employee -->
+		<action name="single" class="com.ecom.action.EmployeeAction"
+			method="addSingle">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Add New Employee(s) -->
+		<action name="multiple" class="com.ecom.action.EmployeeAction"
+			method="addMultiple">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- PATCH Request -->
+	<package namespace="/employee/update" name="updateEmployee"
+		extends="json-default">
+
+		<!-- Update Existing Employee -->
+		<action name="byid" class="com.ecom.action.EmployeeAction"
+			method="update">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- DELETE Request -->
+	<package namespace="/employee/delete" name="deleteEmployee"
+		extends="json-default">
+
+		<!-- Delete Existing Employee -->
+		<action name="byid" class="com.ecom.action.EmployeeAction"
+			method="delete">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
 </struts>

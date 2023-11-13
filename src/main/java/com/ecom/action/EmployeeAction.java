@@ -123,4 +123,58 @@ public class EmployeeAction {
 		}
 	}
 
+	/**
+	 * Method to get all employees
+	 * 
+	 * @return success
+	 */
+	public String readAll() {
+		return "success";
+	}
+
+	/**
+	 * Method to get employee by employee ID
+	 * 
+	 * @return success
+	 */
+	public String readById() {
+		return "success";
+	}
+
+	/**
+	 * Method to add a single employee
+	 * 
+	 * @return success
+	 */
+	public String addSingle() {
+		return "success";
+	}
+
+	/**
+	 * Method to add multiple employee
+	 * 
+	 * @return success
+	 */
+	public String addMutiple() {
+		return "success";
+	}
+
+	/**
+	 * Method to update existing employee
+	 * 
+	 * @return success
+	 */
+	public String update() {
+		return "success";
+	}
+
+	/**
+	 * Method to delete existing employee
+	 * 
+	 * @return success
+	 */
+	public String delete() {
+		return "success";
+	}
+
 }
