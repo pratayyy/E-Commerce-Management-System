@@ -41,6 +41,15 @@ public interface EmployeeManager {
 	public Integer addNewEmployees(List<Employee> employees);
 
 	/**
+	 * Method to update a existing employee using employee ID
+	 * 
+	 * @param employeeId
+	 * @param employee
+	 * @return result
+	 */
+	public Integer updateEmployee(Integer employeeId, Employee emp);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

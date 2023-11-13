@@ -173,6 +173,8 @@ public class EmployeeAction {
 	 * @return success
 	 */
 	public String update() {
+		Integer result = employeeManager.updateEmployee(employeeId, employee);
+		handleResponse(result);
 		return "success";
 	}
 

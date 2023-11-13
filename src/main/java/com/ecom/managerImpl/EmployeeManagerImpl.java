@@ -73,6 +73,27 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	}
 
 	@Override
+	public Integer updateEmployee(Integer employeeId, Employee emp) {
+		if (employeeId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Employee ID";
+			return 0;
+		}
+		if (emp.getFirstName() == null && emp.getLastName() == null && emp.getBirthDate() == null
+				&& emp.getNotes() == null && emp.getPhoto() == null) {
+			statusCode = 400;
+			errorMessage = "No entries to update provided";
+			return 0;
+		}
+		if (employeeDao.getEmployeeById(employeeId) == null) {
+			statusCode = 404;
+			errorMessage = "Employee with provided Employee ID doesnot exist";
+			return 0;
+		}
+		return employeeDao.updateEmployee(employeeId, emp);
+	}
+
+	@Override
 	public String getErrorMessage() {
 		String daoErrorMessage = employeeDao.getErrorMessage();
 		return daoErrorMessage != null ? daoErrorMessage : errorMessage;

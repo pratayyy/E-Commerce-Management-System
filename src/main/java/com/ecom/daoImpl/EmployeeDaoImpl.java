@@ -141,6 +141,49 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
+	public Integer updateEmployee(Integer employeeId, Employee emp) {
+		Employee employee = new Employee();
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder updateEmployeeQuery = new StringBuilder("FROM Employee e");
+			updateEmployeeQuery.append(" WHERE e.isDeleted = :isDeleted");
+			updateEmployeeQuery.append(" AND e.pkEmployeeId = :pkEmployeeId");
+			query = session.createQuery(updateEmployeeQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameter("pkEmployeeId", employeeId);
+			employee = (Employee) query.uniqueResult();
+			if (emp.getFirstName() != null)
+				employee.setFirstName(emp.getFirstName());
+			if (emp.getLastName() != null)
+				employee.setLastName(emp.getLastName());
+			if (emp.getBirthDate() != null)
+				employee.setBirthDate(emp.getBirthDate());
+			if (emp.getNotes() != null)
+				employee.setNotes(emp.getNotes());
+			if (emp.getPhoto() != null)
+				employee.setPhoto(emp.getPhoto());
+			session.update(employee);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public String getErrorMessage() {
 		return errorMessage;
 	}
