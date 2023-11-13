@@ -161,7 +161,9 @@ public class EmployeeAction {
 	 * 
 	 * @return success
 	 */
-	public String addMutiple() {
+	public String addMultiple() {
+		Integer result = employeeManager.addNewEmployees(employees);
+		handleResponse(result);
 		return "success";
 	}
 

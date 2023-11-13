@@ -113,6 +113,34 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
+	public Integer addNewEmployees(List<Employee> employees) {
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			for (Employee employee : employees) {
+				employee.setIsDeleted(-1);
+				session.save(employee);
+				result += 1;
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public String getErrorMessage() {
 		return errorMessage;
 	}

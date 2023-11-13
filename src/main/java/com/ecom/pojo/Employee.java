@@ -1,8 +1,7 @@
 package com.ecom.pojo;
 
 import java.sql.Blob;
-//import java.sql.Date;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

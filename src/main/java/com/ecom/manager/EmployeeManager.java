@@ -25,12 +25,20 @@ public interface EmployeeManager {
 	public EmployeeDto getEmployeeById(Integer employeeId);
 
 	/**
-	 * Method to add new employee
+	 * Method to add a new employee
 	 * 
 	 * @param employee
 	 * @return result
 	 */
 	public Integer addNewEmployee(Employee employee);
+
+	/**
+	 * Method to add new employee(s)
+	 * 
+	 * @param employee
+	 * @return result
+	 */
+	public Integer addNewEmployees(List<Employee> employees);
 
 	/**
 	 * Method to get response body

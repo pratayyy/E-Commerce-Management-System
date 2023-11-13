@@ -32,6 +32,14 @@ public interface EmployeeDao {
 	public Integer addNewEmployee(Employee employee);
 
 	/**
+	 * Method to add new employee(s)
+	 * 
+	 * @param employees
+	 * @return result
+	 */
+	public Integer addNewEmployees(List<Employee> employees);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

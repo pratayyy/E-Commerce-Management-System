@@ -51,7 +51,7 @@ public class EmployeeManagerImpl implements EmployeeManager {
 		}
 		return employee == null ? null : Mapper.employeeDtoMapper(employee);
 	}
-	
+
 	@Override
 	public Integer addNewEmployee(Employee employee) {
 		if (employee.getFirstName() == null || employee.getLastName() == null) {
@@ -60,6 +60,16 @@ public class EmployeeManagerImpl implements EmployeeManager {
 			return 0;
 		}
 		return employeeDao.addNewEmployee(employee);
+	}
+
+	@Override
+	public Integer addNewEmployees(List<Employee> employees) {
+		if (employees.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "Employees list is empty";
+			return 0;
+		}
+		return employeeDao.addNewEmployees(employees);
 	}
 
 	@Override
