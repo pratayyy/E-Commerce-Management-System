@@ -184,6 +184,39 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
+	public Integer deleteEmployee(Integer employeeId) {
+		Employee employee = new Employee();
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder deleteEmployeeQuery = new StringBuilder("FROM Employee e");
+			deleteEmployeeQuery.append(" WHERE e.isDeleted = :isDeleted");
+			deleteEmployeeQuery.append(" AND e.pkEmployeeId = :pkEmployeeId");
+			query = session.createQuery(deleteEmployeeQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameter("pkEmployeeId", employeeId);
+			employee = (Employee) query.uniqueResult();
+			employee.setIsDeleted(1);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public String getErrorMessage() {
 		return errorMessage;
 	}

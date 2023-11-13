@@ -49,6 +49,14 @@ public interface EmployeeDao {
 	public Integer updateEmployee(Integer employeeId, Employee emp);
 
 	/**
+	 * Method to delete existing employee using employee ID
+	 * 
+	 * @param employeeId
+	 * @return result
+	 */
+	public Integer deleteEmployee(Integer employeeId);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

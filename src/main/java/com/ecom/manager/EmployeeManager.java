@@ -50,6 +50,14 @@ public interface EmployeeManager {
 	public Integer updateEmployee(Integer employeeId, Employee emp);
 
 	/**
+	 * Method to delete a existing employee using employee ID
+	 * 
+	 * @param employeeId
+	 * @return result
+	 */
+	public Integer deleteEmployee(Integer employeeId);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

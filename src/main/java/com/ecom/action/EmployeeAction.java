@@ -184,6 +184,8 @@ public class EmployeeAction {
 	 * @return success
 	 */
 	public String delete() {
+		Integer result = employeeManager.deleteEmployee(employeeId);
+		handleResponse(result);
 		return "success";
 	}
 
