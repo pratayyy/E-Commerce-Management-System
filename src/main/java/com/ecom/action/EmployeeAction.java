@@ -151,6 +151,8 @@ public class EmployeeAction {
 	 * @return success
 	 */
 	public String addSingle() {
+		Integer result = employeeManager.addNewEmployee(employee);
+		handleResponse(result);
 		return "success";
 	}
 

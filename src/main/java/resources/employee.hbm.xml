@@ -12,7 +12,8 @@
 		</id>
 		<property name="firstName" column="first_name" type="string"></property>
 		<property name="lastName" column="last_name" type="string"></property>
-		<property name="birthDate" column="birth_date" type="date"></property>
+		<property name="birthDate" column="birth_date"
+			type="java.util.Date"></property>
 		<property name="photo" column="photo" type="blob"></property>
 		<property name="notes" column="notes" type="string"></property>
 		<property name="isDeleted" column="is_deleted"

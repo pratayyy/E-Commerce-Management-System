@@ -51,6 +51,16 @@ public class EmployeeManagerImpl implements EmployeeManager {
 		}
 		return employee == null ? null : Mapper.employeeDtoMapper(employee);
 	}
+	
+	@Override
+	public Integer addNewEmployee(Employee employee) {
+		if (employee.getFirstName() == null || employee.getLastName() == null) {
+			statusCode = 400;
+			errorMessage = "Employee entries are not defined";
+			return 0;
+		}
+		return employeeDao.addNewEmployee(employee);
+	}
 
 	@Override
 	public String getErrorMessage() {

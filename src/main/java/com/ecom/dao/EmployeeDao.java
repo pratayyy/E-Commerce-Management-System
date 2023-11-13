@@ -24,6 +24,14 @@ public interface EmployeeDao {
 	public Employee getEmployeeById(Integer employeeId);
 
 	/**
+	 * Method to add a new employee
+	 * 
+	 * @param employee
+	 * @return result
+	 */
+	public Integer addNewEmployee(Employee employee);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage
