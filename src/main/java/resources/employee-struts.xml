@@ -9,7 +9,7 @@
 	<constant name="struts.devMode" value="true" />
 
 	<!-- GET Request -->
-	<package namespace="employee/read" name="readEmployee"
+	<package namespace="/employee/read" name="readEmployee"
 		extends="json-default">
 
 		<!-- Get All Employees -->

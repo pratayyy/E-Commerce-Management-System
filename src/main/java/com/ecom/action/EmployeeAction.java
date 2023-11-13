@@ -87,7 +87,7 @@ public class EmployeeAction {
 	 * 
 	 * @param employees
 	 */
-	public void hanleResponse(List<EmployeeDto> employees) {
+	public void handleResponse(List<EmployeeDto> employees) {
 		if (employees == null) {
 			root.put("message", employeeManager.getErrorMessage());
 			response.setStatus(employeeManager.getStatusCode());
@@ -129,6 +129,8 @@ public class EmployeeAction {
 	 * @return success
 	 */
 	public String readAll() {
+		List<EmployeeDto> employees = employeeManager.getAllEmployees();
+		handleResponse(employees);
 		return "success";
 	}
 
