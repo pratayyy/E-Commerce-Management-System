@@ -13,4 +13,11 @@
 	<bean id="customerManager" autowire="byName"
 		class="com.ecom.managerImpl.CustomerManagerImpl"></bean>
 
+	<!-- EmployeeDao Bean -->
+	<bean id="employeeDao" class="com.ecom.daoImpl.EmployeeDaoImpl"></bean>
+
+	<!-- EmployeeManager Bean -->
+	<bean id="employeeManager" autowire="byName"
+		class="com.ecom.managerImpl.EmployeeManagerImpl"></bean>
+
 </beans>
