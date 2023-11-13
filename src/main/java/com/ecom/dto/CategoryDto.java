@@ -7,16 +7,16 @@ package com.ecom.dto;
  */
 
 public class CategoryDto {
-	private Integer pkCategoryId;
+	private Integer categoryId;
 	private String categoryName;
 	private String description;
 
-	public Integer getPkCategoryId() {
-		return pkCategoryId;
+	public Integer getCategoryId() {
+		return categoryId;
 	}
 
-	public void setPkCategoryId(Integer pkCategoryId) {
-		this.pkCategoryId = pkCategoryId;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getCategoryName() {
@@ -39,8 +39,8 @@ public class CategoryDto {
 		super();
 	}
 
-	public CategoryDto(Integer pkCategoryId, String categoryName, String description) {
-		this.pkCategoryId = pkCategoryId;
+	public CategoryDto(Integer categoryId, String categoryName, String description) {
+		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 		this.description = description;
 	}

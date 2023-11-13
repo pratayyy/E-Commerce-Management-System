@@ -7,17 +7,17 @@ package com.ecom.dto;
  */
 
 public class OrderDetailDto {
-	private Integer pkOrderDetailId;
+	private Integer orderDetailId;
 	private OrderDto order;
 	private ProductDto product;
 	private Integer quantity;
 
-	public Integer getPkOrderDetailId() {
-		return pkOrderDetailId;
+	public Integer getOrderDetailId() {
+		return orderDetailId;
 	}
 
-	public void setPkOrderDetailId(Integer pkOrderDetailId) {
-		this.pkOrderDetailId = pkOrderDetailId;
+	public void setOrderDetailId(Integer orderDetailId) {
+		this.orderDetailId = orderDetailId;
 	}
 
 	public OrderDto getOrder() {
@@ -48,8 +48,8 @@ public class OrderDetailDto {
 		super();
 	}
 
-	public OrderDetailDto(Integer pkOrderDetailId, OrderDto order, ProductDto product, Integer quantity) {
-		this.pkOrderDetailId = pkOrderDetailId;
+	public OrderDetailDto(Integer orderDetailId, OrderDto order, ProductDto product, Integer quantity) {
+		this.orderDetailId = orderDetailId;
 		this.order = order;
 		this.product = product;
 		this.quantity = quantity;

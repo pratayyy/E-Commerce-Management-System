@@ -7,7 +7,7 @@ package com.ecom.dto;
  */
 
 public class SupplierDto {
-	private Integer pkSupplierId;
+	private Integer supplierId;
 	private String supplierName;
 	private String contactName;
 	private String address;
@@ -16,12 +16,12 @@ public class SupplierDto {
 	private String country;
 	private String phone;
 
-	public Integer getPkSupplierId() {
-		return pkSupplierId;
+	public Integer getSupplierId() {
+		return supplierId;
 	}
 
-	public void setPkSupplierId(Integer pkSupplierId) {
-		this.pkSupplierId = pkSupplierId;
+	public void setPkSupplierId(Integer supplierId) {
+		this.supplierId = supplierId;
 	}
 
 	public String getSupplierName() {
@@ -84,9 +84,9 @@ public class SupplierDto {
 		super();
 	}
 
-	public SupplierDto(Integer pkSupplierId, String supplierName, String contactName, String address, String city,
+	public SupplierDto(Integer supplierId, String supplierName, String contactName, String address, String city,
 			String postalCode, String country, String phone) {
-		this.pkSupplierId = pkSupplierId;
+		this.supplierId = supplierId;
 		this.supplierName = supplierName;
 		this.contactName = contactName;
 		this.address = address;

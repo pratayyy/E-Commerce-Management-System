@@ -6,19 +6,19 @@ package com.ecom.dto;
  * @author pratay.roy
  */
 public class ProductDto {
-	private Integer pkProductId;
+	private Integer productId;
 	private String productName;
 	private SupplierDto supplier;
 	private CategoryDto category;
 	private String unit;
 	private Double price;
 
-	public Integer getPkProductId() {
-		return pkProductId;
+	public Integer getProductId() {
+		return productId;
 	}
 
-	public void setPkProductId(Integer pkProductId) {
-		this.pkProductId = pkProductId;
+	public void setPkProductId(Integer productId) {
+		this.productId = productId;
 	}
 
 	public String getProductName() {
@@ -65,9 +65,9 @@ public class ProductDto {
 		super();
 	}
 
-	public ProductDto(Integer pkProductId, String productName, SupplierDto supplier, CategoryDto category, String unit,
+	public ProductDto(Integer productId, String productName, SupplierDto supplier, CategoryDto category, String unit,
 			Double price) {
-		this.pkProductId = pkProductId;
+		this.productId = productId;
 		this.productName = productName;
 		this.supplier = supplier;
 		this.category = category;

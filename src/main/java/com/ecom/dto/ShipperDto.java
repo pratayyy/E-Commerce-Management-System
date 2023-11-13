@@ -7,16 +7,16 @@ package com.ecom.dto;
  */
 
 public class ShipperDto {
-	private Integer pkShipperId;
+	private Integer shipperId;
 	private String shipperName;
 	private String phone;
 
-	public Integer getPkShipperId() {
-		return pkShipperId;
+	public Integer getShipperId() {
+		return shipperId;
 	}
 
-	public void setPkShipperId(Integer pkShipperId) {
-		this.pkShipperId = pkShipperId;
+	public void setShipperId(Integer shipperId) {
+		this.shipperId = shipperId;
 	}
 
 	public String getShipperName() {
@@ -39,8 +39,8 @@ public class ShipperDto {
 		super();
 	}
 
-	public ShipperDto(Integer pkShipperId, String shipperName, String phone) {
-		this.pkShipperId = pkShipperId;
+	public ShipperDto(Integer shipperId, String shipperName, String phone) {
+		this.shipperId = shipperId;
 		this.shipperName = shipperName;
 		this.phone = phone;
 	}

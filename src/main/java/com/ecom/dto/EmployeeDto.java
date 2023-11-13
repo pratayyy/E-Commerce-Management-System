@@ -10,19 +10,19 @@ import java.sql.Date;
  */
 
 public class EmployeeDto {
-	private Integer pkEmployeeId;
+	private Integer employeeId;
 	private String lastName;
 	private String firstName;
 	private Date birthDate;
 	private Blob photo;
 	private String notes;
 
-	public Integer getPkEmployeeId() {
-		return pkEmployeeId;
+	public Integer getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setPkEmployeeId(Integer pkEmployeeId) {
-		this.pkEmployeeId = pkEmployeeId;
+	public void setPkEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	public String getLastName() {
@@ -69,9 +69,9 @@ public class EmployeeDto {
 		super();
 	}
 
-	public EmployeeDto(Integer pkEmployeeId, String lastName, String firstName, Date birthDate, Blob photo,
+	public EmployeeDto(Integer employeeId, String lastName, String firstName, Date birthDate, Blob photo,
 			String notes) {
-		this.pkEmployeeId = pkEmployeeId;
+		this.employeeId = employeeId;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.birthDate = birthDate;

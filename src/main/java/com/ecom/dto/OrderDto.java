@@ -9,18 +9,18 @@ import java.sql.Date;
  */
 
 public class OrderDto {
-	private Integer pkOrderId;
+	private Integer orderId;
 	private CustomerDto customer;
 	private EmployeeDto employee;
 	private Date orderDate;
 	private ShipperDto shipper;
 
-	public Integer getPkOrderId() {
-		return pkOrderId;
+	public Integer getOrderId() {
+		return orderId;
 	}
 
-	public void setPkOrderId(Integer pkOrderId) {
-		this.pkOrderId = pkOrderId;
+	public void setPkOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 	public CustomerDto getCustomer() {
@@ -59,8 +59,8 @@ public class OrderDto {
 		super();
 	}
 
-	public OrderDto(Integer pkOrderId, CustomerDto customer, EmployeeDto employee, Date orderDate, ShipperDto shipper) {
-		this.pkOrderId = pkOrderId;
+	public OrderDto(Integer orderId, CustomerDto customer, EmployeeDto employee, Date orderDate, ShipperDto shipper) {
+		this.orderId = orderId;
 		this.customer = customer;
 		this.employee = employee;
 		this.orderDate = orderDate;
