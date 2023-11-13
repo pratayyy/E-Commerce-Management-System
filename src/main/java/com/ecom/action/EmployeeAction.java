@@ -140,6 +140,8 @@ public class EmployeeAction {
 	 * @return success
 	 */
 	public String readById() {
+		EmployeeDto employee = employeeManager.getEmployeeById(employeeId);
+		handleResponse(employee);
 		return "success";
 	}
 

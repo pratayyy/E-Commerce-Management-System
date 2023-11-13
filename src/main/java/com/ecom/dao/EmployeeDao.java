@@ -16,6 +16,14 @@ public interface EmployeeDao {
 	public List<Employee> getAllEmployees();
 
 	/**
+	 * Method to get employee using employee ID
+	 * 
+	 * @param employeeId
+	 * @return employee
+	 */
+	public Employee getEmployeeById(Integer employeeId);
+
+	/**
 	 * Method to get response body
 	 * 
 	 * @return errorMessage

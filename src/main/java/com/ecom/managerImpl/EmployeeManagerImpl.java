@@ -38,6 +38,21 @@ public class EmployeeManagerImpl implements EmployeeManager {
 	}
 
 	@Override
+	public EmployeeDto getEmployeeById(Integer employeeId) {
+		if (employeeId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Employee ID";
+			return null;
+		}
+		Employee employee = employeeDao.getEmployeeById(employeeId);
+		if (employee == null) {
+			statusCode = 404;
+			errorMessage = "Employee with provided Employee ID doesnot exist";
+		}
+		return employee == null ? null : Mapper.employeeDtoMapper(employee);
+	}
+
+	@Override
 	public String getErrorMessage() {
 		String daoErrorMessage = employeeDao.getErrorMessage();
 		return daoErrorMessage != null ? daoErrorMessage : errorMessage;
