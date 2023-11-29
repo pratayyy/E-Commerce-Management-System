@@ -8,9 +8,9 @@ import com.ecom.pojo.OrderDetail;
  * @author pratay.roy
  */
 public interface OrderDetailDao {
-	public List<OrderDetail> getOrderDetailsById();
+	public OrderDetail getOrderDetailsById(Integer orderDetailId);
 
-	public List<OrderDetail> getOrderDetailsByIds(List<Integer> orderDetailId);
+	public List<OrderDetail> getOrderDetailsByIds(List<Integer> orderDetailIds);
 
 	public Integer insertOrderDetail(List<OrderDetail> orderDetails);
 
