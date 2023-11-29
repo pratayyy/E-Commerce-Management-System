@@ -82,9 +82,10 @@ public class Mapper {
 		OrderDetailDto orderDetailDto = new OrderDetailDto();
 		try {
 			orderDetailDto.initialize();
-			BeanUtils.copyProperties(orderDetailDto.getOrder(), orderDetailDto.getOrder());
-			BeanUtils.copyProperties(orderDetailDto.getProduct(), orderDetailDto.getProduct());
-			BeanUtils.copyProperties(orderDetailDto, orderDetailDto);
+			orderDetailDto.setOrderDetailId(orderDetail.getPkOrderDetailId());
+			orderDetailDto.setQuantity(orderDetail.getQuantity());
+			BeanUtils.copyProperties(orderDetail.getOrder(), orderDetailDto.getOrder());
+			BeanUtils.copyProperties(orderDetail.getProduct(), orderDetailDto.getProduct());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return orderDetailDto;

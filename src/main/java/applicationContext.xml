@@ -20,4 +20,11 @@
 	<bean id="employeeManager" autowire="byName"
 		class="com.ecom.managerImpl.EmployeeManagerImpl"></bean>
 
+	<!-- OrderDetailDao Bean -->
+	<bean id="orderDetailDao"
+		class="com.ecom.daoImpl.OrderDetailDaoImpl"></bean>
+
+	<!-- OrderDetailManager Bean -->
+	<bean id="orderDetailManager" autowire="byName"
+		class="com.ecom.managerImpl.OrderDetailManagerImpl"></bean>
 </beans>

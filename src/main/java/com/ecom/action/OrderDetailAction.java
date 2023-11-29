@@ -1,0 +1,116 @@
+package com.ecom.action;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.ecom.dto.OrderDetailDto;
+import com.ecom.manager.OrderDetailManager;
+
+/**
+ * @author pratay.roy
+ */
+public class OrderDetailAction {
+	private Integer orderDetailId;
+
+	public Integer getOrderDetailId() {
+		return orderDetailId;
+	}
+
+	public void setOrderDetailId(Integer orderDetailId) {
+		this.orderDetailId = orderDetailId;
+	}
+
+	private Map<String, Object> root;
+
+	public Map<String, Object> getRoot() {
+		return root;
+	}
+
+	public void setRoot(Map<String, Object> root) {
+		this.root = root;
+	}
+
+	private HttpServletResponse response;
+
+	private OrderDetailManager orderDetailManager;
+
+	public OrderDetailManager getOrderDetailManager() {
+		return orderDetailManager;
+	}
+
+	public void setOrderDetailManager(OrderDetailManager orderDetailManager) {
+		this.orderDetailManager = orderDetailManager;
+	}
+
+	/**
+	 * Constructor to get beans and response body initializations
+	 */
+	public OrderDetailAction() {
+		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")) {
+			orderDetailManager = (OrderDetailManager) context.getBean("orderDetailManager");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		root = new HashMap<String, Object>();
+		response = ServletActionContext.getResponse();
+	}
+
+	/**
+	 * Method to set response when receiving a list of orderDetails as output
+	 * 
+	 * @param orderDetails
+	 */
+	public void handleResponse(List<OrderDetailDto> orderDetails) {
+		if (orderDetails == null) {
+			root.put("message", orderDetailManager.getErrorMessage());
+			response.setStatus(orderDetailManager.getStatusCode());
+		} else {
+			root.put("orderDetails", orderDetails);
+		}
+	}
+
+	/**
+	 * Method to set response when receiving a single orderDetail as output
+	 * 
+	 * @param orderDetail
+	 */
+	public void handleResponse(OrderDetailDto orderDetail) {
+		if (orderDetail == null) {
+			root.put("message", orderDetailManager.getErrorMessage());
+			response.setStatus(orderDetailManager.getStatusCode());
+		} else {
+			root.put("orderDetail", orderDetail);
+		}
+	}
+
+	/**
+	 * Method to set response when recieving result as output
+	 * 
+	 * @param result
+	 */
+	public void handleResponse(Integer result) {
+		root.put("result", result);
+		if (result == 0) {
+			root.put("message", orderDetailManager.getErrorMessage());
+			response.setStatus(orderDetailManager.getStatusCode());
+		}
+	}
+
+	/**
+	 * Method to get orderDetail by orderDetailId
+	 * 
+	 * @return success
+	 */
+	public String readById() {
+		OrderDetailDto orderDetail = orderDetailManager.getOrderDetailsById(orderDetailId);
+		handleResponse(orderDetail);
+		return "success";
+	}
+
+}

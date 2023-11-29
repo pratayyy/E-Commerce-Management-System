@@ -7,4 +7,5 @@
 <struts>
 	<include file="resources/customer-struts.xml"></include>
 	<include file="resources/employee-struts.xml"></include>
+	<include file="resources/orderDetail-struts.xml"></include>
 </struts>
