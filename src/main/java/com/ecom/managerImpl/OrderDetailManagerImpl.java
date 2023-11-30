@@ -1,5 +1,8 @@
 package com.ecom.managerImpl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.ecom.dao.OrderDetailDao;
 import com.ecom.dto.OrderDetailDto;
 import com.ecom.manager.OrderDetailManager;
@@ -33,6 +36,23 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 			errorMessage = "OrderDetail with provided OrderDetail ID doesnot exist";
 		}
 		return orderDetail == null ? null : Mapper.orderDetailDtoMapper(orderDetail);
+	}
+
+	@Override
+	public List<OrderDetailDto> getOrderDetailsByIds(List<Integer> orderDetailIds) {
+		if (orderDetailIds == null || orderDetailIds.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "OrderDetailIds list is empty";
+			return null;
+		}
+		List<OrderDetail> orderDetails = orderDetailDao.getOrderDetailsByIds(orderDetailIds);
+		if (orderDetails.isEmpty()) {
+			statusCode = 404;
+			errorMessage = "OrderDetails doesnot exist for these orderDetailIds";
+		}
+		return orderDetails.isEmpty() ? null
+				: orderDetails.stream().map(orderDetail -> Mapper.orderDetailDtoMapper(orderDetail))
+						.collect(Collectors.toList());
 	}
 
 	@Override

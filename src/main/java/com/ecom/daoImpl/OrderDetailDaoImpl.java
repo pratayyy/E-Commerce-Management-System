@@ -36,8 +36,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 		transaction = session.beginTransaction();
 		try {
 			StringBuilder getOrderDetailsByIdQuery = new StringBuilder("FROM OrderDetail od");
-			getOrderDetailsByIdQuery.append(" WHERE od.pkOrderDetailId = :pkOrderDetailId");
+			getOrderDetailsByIdQuery.append(" WHERE od.isDeleted = :isDeleted");
+			getOrderDetailsByIdQuery.append(" AND od.pkOrderDetailId = :pkOrderDetailId");
 			query = session.createQuery(getOrderDetailsByIdQuery.toString());
+			query.setParameter("isDeleted", -1);
 			query.setParameter("pkOrderDetailId", orderDetailId);
 			orderDetail = (OrderDetail) query.uniqueResult();
 			transaction.commit();
@@ -56,8 +58,30 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
 	@Override
 	public List<OrderDetail> getOrderDetailsByIds(List<Integer> orderDetailIds) {
-		// TODO Auto-generated method stub
-		return null;
+		List<OrderDetail> orderDetails = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getOrderDetailsByIdsQuery = new StringBuilder("FROM OrderDetail od");
+			getOrderDetailsByIdsQuery.append(" WHERE od.isDeleted = :isDeleted");
+			getOrderDetailsByIdsQuery.append(" AND od.pkOrderDetailId IN (:pkOrderDetailId)");
+			query = session.createQuery(getOrderDetailsByIdsQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameterList("pkOrderDetailId", orderDetailIds);
+			orderDetails = query.list();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return orderDetails;
 	}
 
 	@Override

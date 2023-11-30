@@ -1,5 +1,7 @@
 package com.ecom.manager;
 
+import java.util.List;
+
 import com.ecom.dto.OrderDetailDto;
 
 /**
@@ -13,6 +15,14 @@ public interface OrderDetailManager {
 	 * @return orderDetailDto
 	 */
 	public OrderDetailDto getOrderDetailsById(Integer orderDetailId);
+
+	/**
+	 * Method to get orderDetail(s) by orderDetailId(s)
+	 * 
+	 * @param orderDetailIds
+	 * @return list of orderDetailDtos
+	 */
+	public List<OrderDetailDto> getOrderDetailsByIds(List<Integer> orderDetailIds);
 
 	/**
 	 * Method to get response body

@@ -26,6 +26,16 @@ public class OrderDetailAction {
 		this.orderDetailId = orderDetailId;
 	}
 
+	private List<Integer> orderDetailIds;
+
+	public List<Integer> getOrderDetailIds() {
+		return orderDetailIds;
+	}
+
+	public void setOrderDetailIds(List<Integer> orderDetailIds) {
+		this.orderDetailIds = orderDetailIds;
+	}
+
 	private Map<String, Object> root;
 
 	public Map<String, Object> getRoot() {
@@ -110,6 +120,12 @@ public class OrderDetailAction {
 	public String readById() {
 		OrderDetailDto orderDetail = orderDetailManager.getOrderDetailsById(orderDetailId);
 		handleResponse(orderDetail);
+		return "success";
+	}
+
+	public String readByIds() {
+		List<OrderDetailDto> orderDetails = orderDetailManager.getOrderDetailsByIds(orderDetailIds);
+		handleResponse(orderDetails);
 		return "success";
 	}
 
