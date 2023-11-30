@@ -36,4 +36,19 @@
 			</result>
 		</action>
 	</package>
+
+	<!-- POST Request -->
+	<package namespace="/orderdetail/insert"
+		name="insertOrderDetail" extends="json-default">
+		<action name="multiple"
+			class="com.ecom.action.OrderDetailAction" method="insert">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+	</package>
 </struts>

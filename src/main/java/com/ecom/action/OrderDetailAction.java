@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ecom.dto.OrderDetailDto;
 import com.ecom.manager.OrderDetailManager;
+import com.ecom.pojo.OrderDetail;
 
 /**
  * @author pratay.roy
@@ -34,6 +35,16 @@ public class OrderDetailAction {
 
 	public void setOrderDetailIds(List<Integer> orderDetailIds) {
 		this.orderDetailIds = orderDetailIds;
+	}
+
+	private List<OrderDetail> orderDetails;
+
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 
 	private Map<String, Object> root;
@@ -126,6 +137,12 @@ public class OrderDetailAction {
 	public String readByIds() {
 		List<OrderDetailDto> orderDetails = orderDetailManager.getOrderDetailsByIds(orderDetailIds);
 		handleResponse(orderDetails);
+		return "success";
+	}
+
+	public String insert() {
+		Integer result = orderDetailManager.insertOrderDetail(orderDetails);
+		handleResponse(result);
 		return "success";
 	}
 

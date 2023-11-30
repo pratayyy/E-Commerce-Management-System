@@ -3,6 +3,7 @@ package com.ecom.manager;
 import java.util.List;
 
 import com.ecom.dto.OrderDetailDto;
+import com.ecom.pojo.OrderDetail;
 
 /**
  * @author pratay.roy
@@ -23,6 +24,14 @@ public interface OrderDetailManager {
 	 * @return list of orderDetailDtos
 	 */
 	public List<OrderDetailDto> getOrderDetailsByIds(List<Integer> orderDetailIds);
+
+	/**
+	 * Method to insert orderDetail
+	 * 
+	 * @param orderDetails
+	 * @return result
+	 */
+	public Integer insertOrderDetail(List<OrderDetail> orderDetails);
 
 	/**
 	 * Method to get response body

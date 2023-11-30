@@ -56,6 +56,16 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 	}
 
 	@Override
+	public Integer insertOrderDetail(List<OrderDetail> orderDetails) {
+		Integer result = orderDetailDao.insertOrderDetail(orderDetails);
+		if (result == 0) {
+			statusCode = 500;
+			errorMessage = "Something went wrong";
+		}
+		return result;
+	}
+
+	@Override
 	public String getErrorMessage() {
 		String daoErrorMessage = orderDetailDao.getErrorMessage();
 		return daoErrorMessage != null ? daoErrorMessage : errorMessage;

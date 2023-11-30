@@ -9,7 +9,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.ecom.dao.OrderDetailDao;
+import com.ecom.pojo.Order;
 import com.ecom.pojo.OrderDetail;
+import com.ecom.pojo.Product;
 
 /**
  * @author pratay.roy
@@ -86,8 +88,44 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
 	@Override
 	public Integer insertOrderDetail(List<OrderDetail> orderDetails) {
-		// TODO Auto-generated method stub
-		return null;
+		Order order = null;
+		Product product = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			for (OrderDetail orderDetail : orderDetails) {
+				if (orderDetail.getOrder() == null || orderDetail.getProduct() == null
+						|| orderDetail.getQuantity() >= 0) {
+					continue;
+				}
+				StringBuilder getOrderQuery = new StringBuilder("FROM Order o");
+				getOrderQuery.append(" WHERE o.pkOrderId = :pkOrderId");
+				query = session.createQuery(getOrderQuery.toString());
+				query.setParameter("pkOrderId", orderDetail.getOrder().getPkOrderId());
+				order = (Order) query.uniqueResult();
+				StringBuilder getProductQuery = new StringBuilder("FROM Product p");
+				getProductQuery.append(" WHERE p.pkProductId = :pkProductId");
+				query = session.createQuery(getProductQuery.toString());
+				query.setParameter("pkProductId", orderDetail.getProduct().getPkProductId());
+				product = (Product) query.uniqueResult();
+				orderDetail.setOrder(order);
+				orderDetail.setProduct(product);
+				session.save(orderDetail);
+				result += 1;
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
