@@ -32,6 +32,33 @@ public interface OrderDetailManager {
 	 * @return result
 	 */
 	public Integer insertOrderDetail(List<OrderDetail> orderDetails);
+	
+	/**
+	 * Method to update orderDetail by orderDetailId
+	 * 
+	 * @param orderDetailId
+	 * @param orderDetail
+	 * @return result
+	 */
+	public Integer updateOrderDetailByOrderDetailId(Integer orderDetailId, OrderDetail orderDetail);
+
+	/**
+	 * Method to update orderDetail by productId
+	 * 
+	 * @param productId
+	 * @param orderDetail
+	 * @return result
+	 */
+	public Integer updateOrderDetailByProductId(Integer productId, OrderDetail orderDetail);
+
+	/**
+	 * Method to update orderDetail by orderId
+	 * 
+	 * @param orderId
+	 * @param orderDetail
+	 * @return result
+	 */
+	public Integer updateOrderDetailByOrderId(Integer orderId, OrderDetail orderDetail);
 
 	/**
 	 * Method to get response body

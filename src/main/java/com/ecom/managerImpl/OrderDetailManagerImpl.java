@@ -3,6 +3,7 @@ package com.ecom.managerImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ecom.dao.EmployeeDao;
 import com.ecom.dao.OrderDetailDao;
 import com.ecom.dto.OrderDetailDto;
 import com.ecom.manager.OrderDetailManager;
@@ -57,12 +58,58 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 
 	@Override
 	public Integer insertOrderDetail(List<OrderDetail> orderDetails) {
+		if (orderDetails.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "OrderDetail entries not provided";
+		}
 		Integer result = orderDetailDao.insertOrderDetail(orderDetails);
 		if (result == 0) {
 			statusCode = 500;
 			errorMessage = "Something went wrong";
 		}
 		return result;
+	}
+
+	@Override
+	public Integer updateOrderDetailByOrderDetailId(Integer orderDetailId, OrderDetail orderDetail) {
+		if (orderDetailId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid orderDetail ID";
+		}
+		if (orderDetail.getOrder().getPkOrderId() == null || orderDetail.getProduct().getPkProductId() == null
+				|| orderDetail.getQuantity() <= 0) {
+			statusCode = 400;
+			errorMessage = "OrderDetail entries not provided";
+		}
+		return orderDetailDao.updateOrderDetailByOrderDetailId(orderDetailId, orderDetail);
+	}
+
+	@Override
+	public Integer updateOrderDetailByProductId(Integer productId, OrderDetail orderDetail) {
+		if (productId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid product ID";
+		}
+		if (orderDetail.getOrder().getPkOrderId() == null || orderDetail.getProduct().getPkProductId() == null
+				|| orderDetail.getQuantity() <= 0) {
+			statusCode = 400;
+			errorMessage = "OrderDetail entries not provided";
+		}
+		return orderDetailDao.updateOrderDetailByProductId(productId, orderDetail);
+	}
+
+	@Override
+	public Integer updateOrderDetailByOrderId(Integer orderId, OrderDetail orderDetail) {
+		if (orderId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid order ID";
+		}
+		if (orderDetail.getOrder().getPkOrderId() == null || orderDetail.getProduct().getPkProductId() == null
+				|| orderDetail.getQuantity() <= 0) {
+			statusCode = 400;
+			errorMessage = "OrderDetail entries not provided";
+		}
+		return orderDetailDao.updateOrderDetailByOrderId(orderId, orderDetail);
 	}
 
 	@Override

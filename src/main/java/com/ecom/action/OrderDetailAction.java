@@ -47,6 +47,16 @@ public class OrderDetailAction {
 		this.orderDetails = orderDetails;
 	}
 
+	private OrderDetail orderDetail;
+
+	public OrderDetail getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(OrderDetail orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
 	private Map<String, Object> root;
 
 	public Map<String, Object> getRoot() {
@@ -134,14 +144,57 @@ public class OrderDetailAction {
 		return "success";
 	}
 
+	/**
+	 * Method to get orderDetail(s) by orderDetailId(s)
+	 * 
+	 * @return success
+	 */
 	public String readByIds() {
 		List<OrderDetailDto> orderDetails = orderDetailManager.getOrderDetailsByIds(orderDetailIds);
 		handleResponse(orderDetails);
 		return "success";
 	}
 
+	/**
+	 * Method to insert new orderDetail
+	 * 
+	 * @return success
+	 */
 	public String insert() {
 		Integer result = orderDetailManager.insertOrderDetail(orderDetails);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to update details using orderDetailId
+	 * 
+	 * @return success
+	 */
+	public String updateByDetailId() {
+		Integer result = orderDetailManager.updateOrderDetailByOrderDetailId(orderDetailId, orderDetail);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to update details using ProductId
+	 * 
+	 * @return success
+	 */
+	public String updateByProductId() {
+		Integer result = orderDetailManager.updateOrderDetailByProductId(orderDetailId, orderDetail);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to update details using OrderId
+	 * 
+	 * @return success
+	 */
+	public String updateByOrderId() {
+		Integer result = orderDetailManager.updateOrderDetailByOrderId(orderDetailId, orderDetail);
 		handleResponse(result);
 		return "success";
 	}

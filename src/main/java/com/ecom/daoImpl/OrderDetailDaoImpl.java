@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
 import com.ecom.dao.OrderDetailDao;
 import com.ecom.pojo.Order;
@@ -130,20 +131,128 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
 	@Override
 	public Integer updateOrderDetailByOrderDetailId(Integer orderDetailId, OrderDetail orderDetail) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderDetail currentOrderDetail = null;
+		Order order = null;
+		Product product = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getCurrentOrderDetailQuery = new StringBuilder("FROM orderDetail od");
+			getCurrentOrderDetailQuery.append(" WHERE od.pkOrderDetailId = :pkOrderDetailId");
+			query = session.createQuery(getCurrentOrderDetailQuery.toString());
+			query.setParameter("pkOrderDetailId", orderDetailId);
+			currentOrderDetail = (OrderDetail) query.uniqueResult();
+			if (orderDetail.getOrder() != null)
+				order = (Order) session.get(Order.class, orderDetail.getOrder().getPkOrderId());
+			if (orderDetail.getProduct() != null)
+				product = (Product) session.get(Product.class, orderDetail.getProduct().getPkProductId());
+			if (order != null)
+				currentOrderDetail.setOrder(order);
+			if (product != null)
+				currentOrderDetail.setProduct(product);
+			if (orderDetail.getQuantity() > 0)
+				currentOrderDetail.setQuantity(orderDetail.getQuantity());
+			session.update(currentOrderDetail);
+			result = 1;
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public Integer updateOrderDetailByProductId(Integer productId, OrderDetail orderDetail) {
-		// TODO Auto-generated method stub
-		return null;
+		List<OrderDetail> currentOrderDetails = null;
+		Order order = null;
+		Product product = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getCurrentOrderDetailQuery = new StringBuilder("FROM orderDetail od");
+			getCurrentOrderDetailQuery.append(" JOIN od.product p");
+			getCurrentOrderDetailQuery.append(" WHERE p.pkProductId = :pkProductId");
+			query = session.createQuery(getCurrentOrderDetailQuery.toString());
+			query.setParameter("pkProductId", productId);
+			currentOrderDetails = query.list();
+			if (orderDetail.getOrder() != null)
+				order = (Order) session.get(Order.class, orderDetail.getOrder().getPkOrderId());
+			if (orderDetail.getProduct() != null)
+				product = (Product) session.get(Product.class, orderDetail.getProduct().getPkProductId());
+			for (OrderDetail detail : currentOrderDetails) {
+				if (order != null)
+					detail.setOrder(order);
+				if (product != null)
+					detail.setProduct(product);
+				if (orderDetail.getQuantity() > 0)
+					detail.setQuantity(orderDetail.getQuantity());
+				result += 1;
+			}
+			session.update(currentOrderDetails);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public Integer updateOrderDetailByOrderId(Integer orderId, OrderDetail orderDetail) {
-		// TODO Auto-generated method stub
-		return null;
+		List<OrderDetail> currentOrderDetails = null;
+		Order order = null;
+		Product product = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder getCurrentOrderDetailQuery = new StringBuilder("FROM orderDetail od");
+			getCurrentOrderDetailQuery.append(" JOIN od.order o");
+			getCurrentOrderDetailQuery.append(" WHERE o.pkOrderId = :pkOrderId");
+			query = session.createQuery(getCurrentOrderDetailQuery.toString());
+			query.setParameter("pkOrderId", orderId);
+			currentOrderDetails = query.list();
+			if (orderDetail.getOrder() != null)
+				order = (Order) session.get(Order.class, orderDetail.getOrder().getPkOrderId());
+			if (orderDetail.getProduct() != null)
+				product = (Product) session.get(Product.class, orderDetail.getProduct().getPkProductId());
+			for (OrderDetail detail : currentOrderDetails) {
+				if (order != null)
+					detail.setOrder(order);
+				if (product != null)
+					detail.setProduct(product);
+				if (orderDetail.getQuantity() > 0)
+					detail.setQuantity(orderDetail.getQuantity());
+				result += 1;
+			}
+			session.update(currentOrderDetails);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override

@@ -40,8 +40,54 @@
 	<!-- POST Request -->
 	<package namespace="/orderdetail/insert"
 		name="insertOrderDetail" extends="json-default">
+
+		<!-- Insert new OrderDetail(s) -->
 		<action name="multiple"
 			class="com.ecom.action.OrderDetailAction" method="insert">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- PATCH Request -->
+	<package namespace="/orderdetail/update"
+		name="updateOrderDetails" extends="json-default">
+
+		<!-- Update by orderDetail Id -->
+		<action name="bydetailid"
+			class="com.highradius.ecom.action.OrderDetailAction"
+			method="updateByDetailId">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+
+		<!-- Update by product Id -->
+		<action name="byproductid"
+			class="com.highradius.ecom.action.OrderDetailAction"
+			method="updateByProductId">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+
+		<!-- Update by order Id -->
+		<action name="byorderid"
+			class="com.highradius.ecom.action.OrderDetailAction"
+			method="updateByOrderId">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>
