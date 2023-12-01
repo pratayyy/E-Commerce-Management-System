@@ -5,7 +5,7 @@
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-	<!-- Employee APIs -->
+	<!-- Employee API Endpoints -->
 	<constant name="struts.devMode" value="true" />
 
 	<!-- GET Request -->

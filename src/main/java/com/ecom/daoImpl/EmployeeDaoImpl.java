@@ -13,6 +13,7 @@ import com.ecom.pojo.Employee;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class EmployeeDaoImpl implements EmployeeDao {
 	private SessionFactory sessionFactory;
@@ -31,10 +32,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> getAllEmployees() {
 		List<Employee> employees = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getAllEmployeesQuery = new StringBuilder("FROM Employee e");
 			getAllEmployeesQuery.append(" WHERE e.isDeleted = :isDeleted");
 			query = session.createQuery(getAllEmployeesQuery.toString());
@@ -59,10 +60,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public Employee getEmployeeById(Integer employeeId) {
 		Employee employee = new Employee();
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getEmployeeByIdQuery = new StringBuilder("FROM Employee e");
 			getEmployeeByIdQuery.append(" WHERE e.isDeleted = :isDeleted");
 			getEmployeeByIdQuery.append(" AND e.pkEmployeeId = :pkEmployeeId");
@@ -88,10 +89,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Integer addNewEmployee(Employee employee) {
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			employee.setIsDeleted(-1);
 			session.save(employee);
 			transaction.commit();
@@ -114,10 +115,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Integer addNewEmployees(List<Employee> employees) {
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			for (Employee employee : employees) {
 				employee.setIsDeleted(-1);
 				session.save(employee);
@@ -143,10 +144,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public Integer updateEmployee(Integer employeeId, Employee emp) {
 		Employee employee = new Employee();
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder updateEmployeeQuery = new StringBuilder("FROM Employee e");
 			updateEmployeeQuery.append(" WHERE e.isDeleted = :isDeleted");
 			updateEmployeeQuery.append(" AND e.pkEmployeeId = :pkEmployeeId");
@@ -186,10 +187,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public Integer deleteEmployee(Integer employeeId) {
 		Employee employee = new Employee();
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder deleteEmployeeQuery = new StringBuilder("FROM Employee e");
 			deleteEmployeeQuery.append(" WHERE e.isDeleted = :isDeleted");
 			deleteEmployeeQuery.append(" AND e.pkEmployeeId = :pkEmployeeId");

@@ -11,6 +11,7 @@ import com.ecom.util.Mapper;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class EmployeeManagerImpl implements EmployeeManager {
 	private EmployeeDao employeeDao;

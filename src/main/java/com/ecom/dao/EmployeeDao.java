@@ -6,6 +6,7 @@ import com.ecom.pojo.Employee;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public interface EmployeeDao {
 	/**

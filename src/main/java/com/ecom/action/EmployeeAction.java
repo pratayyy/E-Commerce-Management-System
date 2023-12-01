@@ -15,9 +15,14 @@ import com.ecom.pojo.Employee;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class EmployeeAction {
 	private Integer employeeId;
+	private Employee employee;
+	private List<Employee> employees;
+	private Map<String, Object> root;
+	private HttpServletResponse response;
 
 	public Integer getEmployeeId() {
 		return employeeId;
@@ -27,8 +32,6 @@ public class EmployeeAction {
 		this.employeeId = employeeId;
 	}
 
-	private Employee employee;
-
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -36,8 +39,6 @@ public class EmployeeAction {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
-	private List<Employee> employees;
 
 	public List<Employee> getEmployees() {
 		return employees;
@@ -47,8 +48,6 @@ public class EmployeeAction {
 		this.employees = employees;
 	}
 
-	private Map<String, Object> root;
-
 	public Map<String, Object> getRoot() {
 		return root;
 	}
@@ -56,8 +55,6 @@ public class EmployeeAction {
 	public void setRoot(Map<String, Object> root) {
 		this.root = root;
 	}
-
-	private HttpServletResponse response;
 
 	private EmployeeManager employeeManager;
 
