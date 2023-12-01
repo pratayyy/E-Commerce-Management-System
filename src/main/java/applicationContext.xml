@@ -27,4 +27,11 @@
 	<!-- OrderDetailManager Bean -->
 	<bean id="orderDetailManager" autowire="byName"
 		class="com.ecom.managerImpl.OrderDetailManagerImpl"></bean>
+
+	<!-- OrderDao Bean -->
+	<bean id="orderDao" class="com.ecom.daoImpl.OrderDaoImpl"></bean>
+
+	<!-- OrderManager Bean -->
+	<bean id="orderManager" autowire="byName"
+		class="com.ecom.managerImpl.OrderManagerImpl"></bean>
 </beans>

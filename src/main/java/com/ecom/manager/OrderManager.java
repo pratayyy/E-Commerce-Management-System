@@ -1,19 +1,20 @@
-package com.ecom.dao;
+package com.ecom.manager;
 
 import java.util.List;
 
+import com.ecom.dto.OrderDto;
 import com.ecom.pojo.Order;
 
 /**
  * @author pratay.roy
  */
-public interface OrderDao {
+public interface OrderManager {
 	/**
 	 * Method to get all orders
 	 * 
 	 * @return list of orders
 	 */
-	public List<Order> getAllOrders();
+	public List<OrderDto> getAllOrders();
 
 	/**
 	 * Method to get order by Order Id
@@ -21,7 +22,7 @@ public interface OrderDao {
 	 * @param orderId
 	 * @return order
 	 */
-	public Order getOrderByOrderId(Integer orderId);
+	public OrderDto getOrderByOrderId(Integer orderId);
 
 	/**
 	 * Method to get order(s) by customer Id
@@ -29,7 +30,7 @@ public interface OrderDao {
 	 * @param customerId
 	 * @return list of orders
 	 */
-	public List<Order> getOrderByCustomerId(Integer customerId);
+	public List<OrderDto> getOrderByCustomerId(Integer customerId);
 
 	/**
 	 * Method to get order(s) by employee Id
@@ -37,7 +38,7 @@ public interface OrderDao {
 	 * @param employeeId
 	 * @return list of orders
 	 */
-	public List<Order> getOrderByEmployeeId(Integer employeeId);
+	public List<OrderDto> getOrderByEmployeeId(Integer employeeId);
 
 	/**
 	 * Method to get order by order date
@@ -45,7 +46,7 @@ public interface OrderDao {
 	 * @param orderDate
 	 * @return list of orders
 	 */
-	public List<Order> getOrderByOrderDate(String orderDate);
+	public List<OrderDto> getOrderByOrderDate(String orderDate);
 
 	/**
 	 * Method to add a new order
@@ -111,4 +112,11 @@ public interface OrderDao {
 	 * @return errorMessage
 	 */
 	String getErrorMessage();
+
+	/**
+	 * Method to get response body
+	 * 
+	 * @return statusCode
+	 */
+	public Integer getStatusCode();
 }
