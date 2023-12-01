@@ -5,7 +5,7 @@
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-	<!-- OrderDetail APIs -->
+	<!-- OrderDetail API Endpoints -->
 	<constant name="struts.devMode" value="true" />
 
 	<!-- GET Request -->
@@ -60,8 +60,7 @@
 
 		<!-- Update by orderDetail Id -->
 		<action name="bydetailid"
-			class="com.highradius.ecom.action.OrderDetailAction"
-			method="updateByDetailId">
+			class="com.ecom.action.OrderDetailAction" method="updateByDetailId">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>
@@ -73,8 +72,7 @@
 
 		<!-- Update by product Id -->
 		<action name="byproductid"
-			class="com.highradius.ecom.action.OrderDetailAction"
-			method="updateByProductId">
+			class="com.ecom.action.OrderDetailAction" method="updateByProductId">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>
@@ -86,8 +84,7 @@
 
 		<!-- Update by order Id -->
 		<action name="byorderid"
-			class="com.highradius.ecom.action.OrderDetailAction"
-			method="updateByOrderId">
+			class="com.ecom.action.OrderDetailAction" method="updateByOrderId">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>
@@ -103,8 +100,7 @@
 		name="deleteOrderDetails" extends="json-default">
 
 		<!-- Delete using Id -->
-		<action name="single"
-			class="com.highradius.ecom.action.OrderDetailAction"
+		<action name="single" class="com.ecom.action.OrderDetailAction"
 			method="deleteSingle">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
@@ -115,10 +111,9 @@
 			</result>
 		</action>
 
-		<!-- Dlete using Id(s) -->
+		<!-- Delete using Id(s) -->
 		<action name="multiple"
-			class="com.highradius.ecom.action.OrderDetailAction"
-			method="deleteMultiple">
+			class="com.ecom.action.OrderDetailAction" method="deleteMultiple">
 			<interceptor-ref name="json">
 				<param name="enableSMD">true</param>
 			</interceptor-ref>

@@ -16,6 +16,7 @@ import com.ecom.pojo.Product;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class OrderDetailDaoImpl implements OrderDetailDao {
 	private SessionFactory sessionFactory;
@@ -34,10 +35,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 	@Override
 	public OrderDetail getOrderDetailsById(Integer orderDetailId) {
 		OrderDetail orderDetail = new OrderDetail();
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getOrderDetailsByIdQuery = new StringBuilder("FROM OrderDetail od");
 			getOrderDetailsByIdQuery.append(" WHERE od.isDeleted = :isDeleted");
 			getOrderDetailsByIdQuery.append(" AND od.pkOrderDetailId = :pkOrderDetailId");
@@ -50,6 +51,8 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -62,10 +65,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 	@Override
 	public List<OrderDetail> getOrderDetailsByIds(List<Integer> orderDetailIds) {
 		List<OrderDetail> orderDetails = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getOrderDetailsByIdsQuery = new StringBuilder("FROM OrderDetail od");
 			getOrderDetailsByIdsQuery.append(" WHERE od.isDeleted = :isDeleted");
 			getOrderDetailsByIdsQuery.append(" AND od.pkOrderDetailId IN (:pkOrderDetailId)");
@@ -78,6 +81,8 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -91,10 +96,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 	public Integer insertOrderDetail(List<OrderDetail> orderDetails) {
 		Order order = null;
 		Product product = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			for (OrderDetail orderDetail : orderDetails) {
 				if (orderDetail.getOrder() == null || orderDetail.getProduct() == null
 						|| orderDetail.getQuantity() >= 0) {
@@ -120,6 +125,9 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -134,10 +142,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 		OrderDetail currentOrderDetail = null;
 		Order order = null;
 		Product product = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getCurrentOrderDetailQuery = new StringBuilder("FROM orderDetail od");
 			getCurrentOrderDetailQuery.append(" WHERE od.pkOrderDetailId = :pkOrderDetailId");
 			query = session.createQuery(getCurrentOrderDetailQuery.toString());
@@ -160,6 +168,9 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -174,10 +185,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 		List<OrderDetail> currentOrderDetails = null;
 		Order order = null;
 		Product product = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getCurrentOrderDetailQuery = new StringBuilder("FROM orderDetail od");
 			getCurrentOrderDetailQuery.append(" JOIN od.product p");
 			getCurrentOrderDetailQuery.append(" WHERE p.pkProductId = :pkProductId");
@@ -203,6 +214,9 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -217,10 +231,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 		List<OrderDetail> currentOrderDetails = null;
 		Order order = null;
 		Product product = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getCurrentOrderDetailQuery = new StringBuilder("FROM orderDetail od");
 			getCurrentOrderDetailQuery.append(" JOIN od.order o");
 			getCurrentOrderDetailQuery.append(" WHERE o.pkOrderId = :pkOrderId");
@@ -246,6 +260,9 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -258,10 +275,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 	@Override
 	public Integer deleteOrderDetail(Integer orderDetailId) {
 		OrderDetail orderDetail = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder deleteOrderDetailQuery = new StringBuilder("FROM orderDetail od");
 			deleteOrderDetailQuery.append(" WHERE od.isDeleted = :isDeleted");
 			deleteOrderDetailQuery.append(" AND od.pkOrderDetailId = :pkOrderDetailId");
@@ -278,6 +295,9 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -290,10 +310,10 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 	@Override
 	public Integer deleteOrderDetails(List<Integer> orderDetailIds) {
 		List<OrderDetail> orderDetails = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder deleteOrderDetailsQuery = new StringBuilder("FROM orderDetail od");
 			deleteOrderDetailsQuery.append(" WHERE od.isDeleted = :isDeleted");
 			deleteOrderDetailsQuery.append(" AND od.pkOrderDetailId IN (:pkOrderDetaild)");
@@ -310,6 +330,9 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+			result = 0;
+			errorMessage = e.getMessage();
+			e.printStackTrace();
 		} finally {
 			if (session != null) {
 				session.close();

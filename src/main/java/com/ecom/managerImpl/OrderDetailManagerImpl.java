@@ -10,6 +10,10 @@ import com.ecom.manager.OrderDetailManager;
 import com.ecom.pojo.OrderDetail;
 import com.ecom.util.Mapper;
 
+/**
+ * @author pratay.roy
+ * @version 0.0.1
+ */
 public class OrderDetailManagerImpl implements OrderDetailManager {
 	private OrderDetailDao orderDetailDao;
 
@@ -76,13 +80,20 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 		if (orderDetailId <= 0) {
 			statusCode = 400;
 			errorMessage = "Invalid orderDetail ID";
+			return 0;
 		}
 		if (orderDetail.getOrder().getPkOrderId() == null || orderDetail.getProduct().getPkProductId() == null
 				|| orderDetail.getQuantity() <= 0) {
 			statusCode = 400;
 			errorMessage = "OrderDetail entries not provided";
+			return 0;
 		}
-		return orderDetailDao.updateOrderDetailByOrderDetailId(orderDetailId, orderDetail);
+		Integer result = orderDetailDao.updateOrderDetailByOrderDetailId(orderDetailId, orderDetail);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong";
+		}
+		return result;
 	}
 
 	@Override
@@ -90,13 +101,20 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 		if (productId <= 0) {
 			statusCode = 400;
 			errorMessage = "Invalid product ID";
+			return 0;
 		}
 		if (orderDetail.getOrder().getPkOrderId() == null || orderDetail.getProduct().getPkProductId() == null
 				|| orderDetail.getQuantity() <= 0) {
 			statusCode = 400;
 			errorMessage = "OrderDetail entries not provided";
+			return 0;
 		}
-		return orderDetailDao.updateOrderDetailByProductId(productId, orderDetail);
+		Integer result = orderDetailDao.updateOrderDetailByProductId(productId, orderDetail);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong";
+		}
+		return result;
 	}
 
 	@Override
@@ -104,13 +122,20 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 		if (orderId <= 0) {
 			statusCode = 400;
 			errorMessage = "Invalid order ID";
+			return 0;
 		}
 		if (orderDetail.getOrder().getPkOrderId() == null || orderDetail.getProduct().getPkProductId() == null
 				|| orderDetail.getQuantity() <= 0) {
 			statusCode = 400;
 			errorMessage = "OrderDetail entries not provided";
+			return 0;
 		}
-		return orderDetailDao.updateOrderDetailByOrderId(orderId, orderDetail);
+		Integer result = orderDetailDao.updateOrderDetailByOrderId(orderId, orderDetail);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong";
+		}
+		return result;
 	}
 
 	@Override
@@ -118,6 +143,7 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 		if (orderDetailId <= 0) {
 			statusCode = 400;
 			errorMessage = "Invalid OrderDetail ID";
+			return 0;
 		}
 		Integer result = orderDetailDao.deleteOrderDetail(orderDetailId);
 		if (result == 0) {
@@ -132,6 +158,7 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 		if (orderDetailIds.isEmpty()) {
 			statusCode = 400;
 			errorMessage = "Invalid OrderDetail IDs";
+			return 0;
 		}
 		int result = orderDetailDao.deleteOrderDetails(orderDetailIds);
 		if (result == 0) {

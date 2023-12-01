@@ -15,9 +15,15 @@ import com.ecom.pojo.OrderDetail;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class OrderDetailAction {
 	private Integer orderDetailId;
+	private List<Integer> orderDetailIds;
+	private OrderDetail orderDetail;
+	private List<OrderDetail> orderDetails;
+	private Map<String, Object> root;
+	private HttpServletResponse response;
 
 	public Integer getOrderDetailId() {
 		return orderDetailId;
@@ -27,8 +33,6 @@ public class OrderDetailAction {
 		this.orderDetailId = orderDetailId;
 	}
 
-	private List<Integer> orderDetailIds;
-
 	public List<Integer> getOrderDetailIds() {
 		return orderDetailIds;
 	}
@@ -36,8 +40,6 @@ public class OrderDetailAction {
 	public void setOrderDetailIds(List<Integer> orderDetailIds) {
 		this.orderDetailIds = orderDetailIds;
 	}
-
-	private List<OrderDetail> orderDetails;
 
 	public List<OrderDetail> getOrderDetails() {
 		return orderDetails;
@@ -47,8 +49,6 @@ public class OrderDetailAction {
 		this.orderDetails = orderDetails;
 	}
 
-	private OrderDetail orderDetail;
-
 	public OrderDetail getOrderDetail() {
 		return orderDetail;
 	}
@@ -57,8 +57,6 @@ public class OrderDetailAction {
 		this.orderDetail = orderDetail;
 	}
 
-	private Map<String, Object> root;
-
 	public Map<String, Object> getRoot() {
 		return root;
 	}
@@ -66,8 +64,6 @@ public class OrderDetailAction {
 	public void setRoot(Map<String, Object> root) {
 		this.root = root;
 	}
-
-	private HttpServletResponse response;
 
 	private OrderDetailManager orderDetailManager;
 
