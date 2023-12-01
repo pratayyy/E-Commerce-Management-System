@@ -61,6 +61,7 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 		if (orderDetails.isEmpty()) {
 			statusCode = 400;
 			errorMessage = "OrderDetail entries not provided";
+			return 0;
 		}
 		Integer result = orderDetailDao.insertOrderDetail(orderDetails);
 		if (result == 0) {
@@ -110,6 +111,34 @@ public class OrderDetailManagerImpl implements OrderDetailManager {
 			errorMessage = "OrderDetail entries not provided";
 		}
 		return orderDetailDao.updateOrderDetailByOrderId(orderId, orderDetail);
+	}
+
+	@Override
+	public Integer deleteOrderDetail(Integer orderDetailId) {
+		if (orderDetailId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid OrderDetail ID";
+		}
+		Integer result = orderDetailDao.deleteOrderDetail(orderDetailId);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "OrderDetail with provided ID doesnot exist";
+		}
+		return result;
+	}
+
+	@Override
+	public Integer deleteOrderDetails(List<Integer> orderDetailIds) {
+		if (orderDetailIds.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "Invalid OrderDetail IDs";
+		}
+		int result = orderDetailDao.deleteOrderDetails(orderDetailIds);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "OrderDetails with provided IDs doesnot exist";
+		}
+		return result;
 	}
 
 	@Override

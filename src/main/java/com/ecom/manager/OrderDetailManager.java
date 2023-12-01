@@ -32,7 +32,7 @@ public interface OrderDetailManager {
 	 * @return result
 	 */
 	public Integer insertOrderDetail(List<OrderDetail> orderDetails);
-	
+
 	/**
 	 * Method to update orderDetail by orderDetailId
 	 * 
@@ -59,6 +59,22 @@ public interface OrderDetailManager {
 	 * @return result
 	 */
 	public Integer updateOrderDetailByOrderId(Integer orderId, OrderDetail orderDetail);
+
+	/**
+	 * Method to delete orderDetail by orderDetailId
+	 * 
+	 * @param orderDetailId
+	 * @return result
+	 */
+	public Integer deleteOrderDetail(Integer orderDetailId);
+
+	/**
+	 * Method to delete orderDetail(s) by orderDetailId(s)
+	 * 
+	 * @param orderDetailIds
+	 * @return return
+	 */
+	public Integer deleteOrderDetails(List<Integer> orderDetailIds);
 
 	/**
 	 * Method to get response body

@@ -199,4 +199,26 @@ public class OrderDetailAction {
 		return "success";
 	}
 
+	/**
+	 * Method to delete a single orderDetail
+	 * 
+	 * @return success
+	 */
+	public String deleteSingle() {
+		Integer result = orderDetailManager.deleteOrderDetail(orderDetailId);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to delete multiple orderDetails
+	 * 
+	 * @return success
+	 */
+	public String deleteMultiple() {
+		Integer result = orderDetailManager.deleteOrderDetails(orderDetailIds);
+		handleResponse(result);
+		return "success";
+	}
+
 }

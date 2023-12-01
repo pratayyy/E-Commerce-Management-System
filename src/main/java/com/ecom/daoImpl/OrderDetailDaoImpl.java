@@ -257,14 +257,66 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
 	@Override
 	public Integer deleteOrderDetail(Integer orderDetailId) {
-		// TODO Auto-generated method stub
-		return null;
+		OrderDetail orderDetail = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder deleteOrderDetailQuery = new StringBuilder("FROM orderDetail od");
+			deleteOrderDetailQuery.append(" WHERE od.isDeleted = :isDeleted");
+			deleteOrderDetailQuery.append(" AND od.pkOrderDetailId = :pkOrderDetailId");
+			query = session.createQuery(deleteOrderDetailQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameter("pkOrderDetailId", orderDetailId);
+			orderDetail = (OrderDetail) query.uniqueResult();
+			if (orderDetail != null) {
+				orderDetail.setIsDeleted(1);
+				result = 1;
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public Integer deleteOrderDetails(List<Integer> orderDetailIds) {
-		// TODO Auto-generated method stub
-		return null;
+		List<OrderDetail> orderDetails = null;
+		sessionFactory = configuration.buildSessionFactory();
+		session = sessionFactory.openSession();
+		transaction = session.beginTransaction();
+		try {
+			StringBuilder deleteOrderDetailsQuery = new StringBuilder("FROM orderDetail od");
+			deleteOrderDetailsQuery.append(" WHERE od.isDeleted = :isDeleted");
+			deleteOrderDetailsQuery.append(" AND od.pkOrderDetailId IN (:pkOrderDetaild)");
+			query = session.createQuery(deleteOrderDetailsQuery.toString());
+			query.setParameter("isDeleted", -1);
+			query.setParameterList("pkOrderDetailId", orderDetailIds);
+			orderDetails = query.list();
+			for (OrderDetail orderDetail : orderDetails) {
+				orderDetail.setIsDeleted(1);
+				result += 1;
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
