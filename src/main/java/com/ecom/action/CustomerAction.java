@@ -15,9 +15,15 @@ import com.ecom.pojo.Customer;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class CustomerAction {
 	private Integer customerId;
+	private List<String> countries;
+	private Customer customer;
+	private List<Customer> customers;
+	private Map<String, Object> root;
+	private HttpServletResponse response;
 
 	public Integer getCustomerId() {
 		return customerId;
@@ -27,8 +33,6 @@ public class CustomerAction {
 		this.customerId = customerId;
 	}
 
-	private List<String> countries;
-
 	public List<String> getCountries() {
 		return countries;
 	}
@@ -36,8 +40,6 @@ public class CustomerAction {
 	public void setCountries(List<String> countries) {
 		this.countries = countries;
 	}
-
-	private Customer customer;
 
 	public List<Customer> getCustomers() {
 		return customers;
@@ -47,8 +49,6 @@ public class CustomerAction {
 		this.customers = customers;
 	}
 
-	private List<Customer> customers;
-
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -57,8 +57,6 @@ public class CustomerAction {
 		this.customer = customer;
 	}
 
-	private Map<String, Object> root;
-
 	public Map<String, Object> getRoot() {
 		return root;
 	}
@@ -66,8 +64,6 @@ public class CustomerAction {
 	public void setRoot(Map<String, Object> root) {
 		this.root = root;
 	}
-
-	private HttpServletResponse response;
 
 	private CustomerManager customerManager;
 

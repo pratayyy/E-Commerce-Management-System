@@ -13,6 +13,7 @@ import com.ecom.pojo.Customer;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class CustomerDaoImpl implements CustomerDao {
 	private SessionFactory sessionFactory;
@@ -32,10 +33,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public List<Customer> getAllCustomers() {
 		List<Customer> customers = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getAllCustomerQuery = new StringBuilder("FROM Customer c");
 			getAllCustomerQuery.append(" WHERE c.isDeleted = :isDeleted");
 			query = session.createQuery(getAllCustomerQuery.toString());
@@ -59,10 +60,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Customer getCustomerById(Integer customerId) {
 		Customer customer = new Customer();
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getCustomerByIdQuery = new StringBuilder("FROM Customer c");
 			getCustomerByIdQuery.append(" WHERE c.isDeleted = :isDeleted");
 			getCustomerByIdQuery.append(" AND c.pkCustomerId = :pkCustomerId");
@@ -88,10 +89,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public List<Customer> getAllCustomersByCountries(List<String> countries) {
 		List<Customer> customers = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getAllCustomersByCountriesQuery = new StringBuilder("FROM Customer c");
 			getAllCustomersByCountriesQuery.append(" WHERE c.isDeleted = :isDeleted");
 			getAllCustomersByCountriesQuery.append(" AND c.country IN (:country)");
@@ -116,10 +117,10 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public Integer addNewCustomer(Customer customer) {
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			customer.setIsDeleted(-1);
 			session.save(customer);
 			transaction.commit();
@@ -142,10 +143,10 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public Integer addNewCustomers(List<Customer> customers) {
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			for (Customer customer : customers) {
 				customer.setIsDeleted(-1);
 				session.save(customer);
@@ -171,10 +172,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Integer updateCustomer(Integer customerId, Customer customerNewValues) {
 		Customer customer = new Customer();
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getCustomerToUpdateQuery = new StringBuilder("FROM Customer c");
 			getCustomerToUpdateQuery.append(" WHERE c.isDeleted = :isDeleted");
 			getCustomerToUpdateQuery.append(" AND c.pkCustomerId = :pkCustomerId");
@@ -216,10 +217,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Integer deleteCustomerById(Integer customerId) {
 		Customer customer = new Customer();
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getCustomerToDeleteQuery = new StringBuilder("FROM Customer c");
 			getCustomerToDeleteQuery.append(" WHERE c.isDeleted = :isDeleted");
 			getCustomerToDeleteQuery.append(" AND c.pkCustomerId = :pkCustomerId");
@@ -249,10 +250,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Integer deleteCustomersByCountries(List<String> countries) {
 		List<Customer> customers = null;
-		sessionFactory = configuration.buildSessionFactory();
-		session = sessionFactory.openSession();
-		transaction = session.beginTransaction();
 		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
 			StringBuilder getCustomerToDeleteByCountriesQuery = new StringBuilder("FROM Customer c");
 			getCustomerToDeleteByCountriesQuery.append(" WHERE c.isDeleted = :isDeleted");
 			getCustomerToDeleteByCountriesQuery.append(" AND c.country IN (:country)");
