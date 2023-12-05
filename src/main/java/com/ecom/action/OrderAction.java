@@ -154,4 +154,137 @@ public class OrderAction {
 			response.setStatus(orderManager.getStatusCode());
 		}
 	}
+
+	/**
+	 * Method to get all orders
+	 * 
+	 * @return success
+	 */
+	public String read() {
+		List<OrderDto> orders = orderManager.getAllOrders();
+		handleResponse(orders);
+		return "success";
+	}
+
+	/**
+	 * Method to get order by Order Id
+	 * 
+	 * @return success
+	 */
+	public String readByOrderId() {
+		OrderDto order = orderManager.getOrderByOrderId(orderId);
+		handleResponse(order);
+		return "success";
+	}
+
+	/**
+	 * Method to get order(s) by customer Id
+	 * 
+	 * @return success
+	 */
+	public String readByCustomerId() {
+		List<OrderDto> orders = orderManager.getOrdersByCustomerId(customerId);
+		handleResponse(orders);
+		return "success";
+	}
+
+	/**
+	 * Method to get order(s) by employee Id
+	 * 
+	 * @return success
+	 */
+	public String readByEmployeeId() {
+		List<OrderDto> orders = orderManager.getOrdersByEmployeeId(employeeId);
+		handleResponse(orders);
+		return "success";
+	}
+
+	/**
+	 * Method to get order by order date
+	 * 
+	 * @return success
+	 */
+	public String readByOrderDate() {
+		List<OrderDto> orders = orderManager.getOrdersByOrderDate(orderDate);
+		handleResponse(orders);
+		return "success";
+	}
+
+	/**
+	 * Method to add a new order
+	 * 
+	 * @return success
+	 */
+	public String addOrder() {
+		Integer result = orderManager.addNewOrder(order);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to add multiple orders
+	 * 
+	 * @return success
+	 */
+	public String addOrders() {
+		Integer result = orderManager.addNewOrders(orders);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to update order(s) by order Id
+	 * 
+	 * @return success
+	 */
+	public String updateByOrderId() {
+		Integer result = orderManager.updateOrderByOrderId(orderId, order);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to update order(s) using shipper Id
+	 * 
+	 * @return success
+	 */
+	public String updateByShipperId() {
+		Integer result = orderManager.updateOrdersByShipperId(shipperId, order);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to delete order by order Id
+	 * 
+	 * @return success
+	 */
+	public String deleteByOrderId() {
+		Integer result = orderManager.deleteOrderByOrderId(orderId);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to delete order by employee Id
+	 * 
+	 * @return success
+	 */
+	public String deleteByEmployeeId() {
+		Integer result = orderManager.deleteOrdersByEmployeeId(employeeId);
+		handleResponse(result);
+		return "success";
+	}
+
+	/**
+	 * Method to delete order by customer Id
+	 * 
+	 * @return success
+	 */
+	public String deleteByCustomerId() {
+		Integer result = orderManager.deleteOrdersByCustomerId(customerId);
+		handleResponse(result);
+		return "success";
+	}
+
 }

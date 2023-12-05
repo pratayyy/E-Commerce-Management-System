@@ -23,19 +23,19 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<Order> getOrderByCustomerId(Integer customerId) {
+	public List<Order> getOrdersByCustomerId(Integer customerId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Order> getOrderByEmployeeId(Integer employeeId) {
+	public List<Order> getOrdersByEmployeeId(Integer employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Order> getOrderByOrderDate(String orderDate) {
+	public List<Order> getOrdersByOrderDate(String orderDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -53,13 +53,13 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public Integer updateOrderbyOrderId(Integer orderId, Order order) {
+	public Integer updateOrderByOrderId(Integer orderId, Order order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer updateOrderByShipperId(Integer shipperId, Order order) {
+	public Integer updateOrdersByShipperId(Integer shipperId, Order order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -71,13 +71,13 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public Integer deleteOrderByEmployeeId(Integer employeeId) {
+	public Integer deleteOrdersByEmployeeId(Integer employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer deleteOrderByCustomerId(Integer customerId) {
+	public Integer deleteOrdersByCustomerId(Integer customerId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

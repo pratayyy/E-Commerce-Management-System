@@ -30,7 +30,7 @@ public interface OrderManager {
 	 * @param customerId
 	 * @return list of orders
 	 */
-	public List<OrderDto> getOrderByCustomerId(Integer customerId);
+	public List<OrderDto> getOrdersByCustomerId(Integer customerId);
 
 	/**
 	 * Method to get order(s) by employee Id
@@ -38,7 +38,7 @@ public interface OrderManager {
 	 * @param employeeId
 	 * @return list of orders
 	 */
-	public List<OrderDto> getOrderByEmployeeId(Integer employeeId);
+	public List<OrderDto> getOrdersByEmployeeId(Integer employeeId);
 
 	/**
 	 * Method to get order by order date
@@ -46,7 +46,7 @@ public interface OrderManager {
 	 * @param orderDate
 	 * @return list of orders
 	 */
-	public List<OrderDto> getOrderByOrderDate(String orderDate);
+	public List<OrderDto> getOrdersByOrderDate(String orderDate);
 
 	/**
 	 * Method to add a new order
@@ -71,7 +71,7 @@ public interface OrderManager {
 	 * @param order
 	 * @return result
 	 */
-	public Integer updateOrderbyOrderId(Integer orderId, Order order);
+	public Integer updateOrderByOrderId(Integer orderId, Order order);
 
 	/**
 	 * Method to update order(s) using shipper Id
@@ -80,7 +80,7 @@ public interface OrderManager {
 	 * @param order
 	 * @return result
 	 */
-	public Integer updateOrderByShipperId(Integer shipperId, Order order);
+	public Integer updateOrdersByShipperId(Integer shipperId, Order order);
 
 	/**
 	 * Method to delete order by order Id
@@ -96,7 +96,7 @@ public interface OrderManager {
 	 * @param employeeId
 	 * @return result
 	 */
-	public Integer deleteOrderByEmployeeId(Integer employeeId);
+	public Integer deleteOrdersByEmployeeId(Integer employeeId);
 
 	/**
 	 * Method to delete order by customer Id
@@ -104,7 +104,7 @@ public interface OrderManager {
 	 * @param customerId
 	 * @return result
 	 */
-	public Integer deleteOrderByCustomerId(Integer customerId);
+	public Integer deleteOrdersByCustomerId(Integer customerId);
 
 	/**
 	 * Method to get response body

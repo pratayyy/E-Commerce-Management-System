@@ -29,7 +29,7 @@ public interface OrderDao {
 	 * @param customerId
 	 * @return list of orders
 	 */
-	public List<Order> getOrderByCustomerId(Integer customerId);
+	public List<Order> getOrdersByCustomerId(Integer customerId);
 
 	/**
 	 * Method to get order(s) by employee Id
@@ -37,7 +37,7 @@ public interface OrderDao {
 	 * @param employeeId
 	 * @return list of orders
 	 */
-	public List<Order> getOrderByEmployeeId(Integer employeeId);
+	public List<Order> getOrdersByEmployeeId(Integer employeeId);
 
 	/**
 	 * Method to get order by order date
@@ -45,7 +45,7 @@ public interface OrderDao {
 	 * @param orderDate
 	 * @return list of orders
 	 */
-	public List<Order> getOrderByOrderDate(String orderDate);
+	public List<Order> getOrdersByOrderDate(String orderDate);
 
 	/**
 	 * Method to add a new order
@@ -70,7 +70,7 @@ public interface OrderDao {
 	 * @param order
 	 * @return result
 	 */
-	public Integer updateOrderbyOrderId(Integer orderId, Order order);
+	public Integer updateOrderByOrderId(Integer orderId, Order order);
 
 	/**
 	 * Method to update order(s) using shipper Id
@@ -79,7 +79,7 @@ public interface OrderDao {
 	 * @param order
 	 * @return result
 	 */
-	public Integer updateOrderByShipperId(Integer shipperId, Order order);
+	public Integer updateOrdersByShipperId(Integer shipperId, Order order);
 
 	/**
 	 * Method to delete order by order Id
@@ -95,7 +95,7 @@ public interface OrderDao {
 	 * @param employeeId
 	 * @return result
 	 */
-	public Integer deleteOrderByEmployeeId(Integer employeeId);
+	public Integer deleteOrdersByEmployeeId(Integer employeeId);
 
 	/**
 	 * Method to delete order by customer Id
@@ -103,7 +103,7 @@ public interface OrderDao {
 	 * @param customerId
 	 * @return result
 	 */
-	public Integer deleteOrderByCustomerId(Integer customerId);
+	public Integer deleteOrdersByCustomerId(Integer customerId);
 
 	/**
 	 * Method to get response body

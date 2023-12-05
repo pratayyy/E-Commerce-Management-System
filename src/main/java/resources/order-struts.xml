@@ -1,1 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<!-- Order APIs -->
+	<constant name="struts.devMode" value="true" />
+
+	<!-- GET Request -->
+	<package namespace="/order/read" name="read"
+		extends="json-default">
+
+		<!-- Get All Orders -->
+		<action name="all" method="read"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Get Order by Order Id -->
+		<action name="byorderid" method="readByOrderId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Get Order(s) by Customer Id -->
+		<action name="bycustomerid" method="readByCustomerId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Get Order(s) by Employee Id -->
+		<action name="byemployeeid" method="readByEmployeeId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Get Order(s) by Order Date -->
+		<action name="byorderdate" method="readByOrderDate"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- POST Request -->
+	<package name="add" namespace="/order/add"
+		extends="json-default">
+
+		<!-- Add Single Order -->
+		<action name="single" method="addOrder"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Add Multiple Orders -->
+		<action name="multiple" method="addOrders"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- PATCH Request -->
+	<package name="update" namespace="/order/update"
+		extends="json-default">
+
+		<!-- Update Order by Order Id -->
+		<action name="byorderid" method="updateByOrderId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Update Order(s) by Shipper Id -->
+		<action name="byshipperid" method="updateByShipperId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
+
+	<!-- DELETE Request -->
+	<package name="delete" namespace="/order/delete"
+		extends="json-default">
+
+		<!-- Delete Order by Order Id -->
+		<action name="byorderid" method="deleteByOrderId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Delete Order(s) by Employee Id -->
+		<action name="byemployeeid" method="deleteByEmployeeId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+
+		<!-- Delete Order(s) by Customer Id -->
+		<action name="bycustomerid" method="deleteByCustomerId"
+			class="com.ecom.action.OrderAction">
+			<interceptor-ref name="json">
+				<param name="enableSMD">true</param>
+			</interceptor-ref>
+			<result type="json">
+				<param name="root">root</param>
+			</result>
+		</action>
+	</package>
+</struts>

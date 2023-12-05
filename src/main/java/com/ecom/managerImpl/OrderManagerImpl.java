@@ -37,19 +37,19 @@ public class OrderManagerImpl implements OrderManager {
 	}
 
 	@Override
-	public List<OrderDto> getOrderByCustomerId(Integer customerId) {
+	public List<OrderDto> getOrdersByCustomerId(Integer customerId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<OrderDto> getOrderByEmployeeId(Integer employeeId) {
+	public List<OrderDto> getOrdersByEmployeeId(Integer employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<OrderDto> getOrderByOrderDate(String orderDate) {
+	public List<OrderDto> getOrdersByOrderDate(String orderDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -67,13 +67,13 @@ public class OrderManagerImpl implements OrderManager {
 	}
 
 	@Override
-	public Integer updateOrderbyOrderId(Integer orderId, Order order) {
+	public Integer updateOrderByOrderId(Integer orderId, Order order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer updateOrderByShipperId(Integer shipperId, Order order) {
+	public Integer updateOrdersByShipperId(Integer shipperId, Order order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -85,13 +85,13 @@ public class OrderManagerImpl implements OrderManager {
 	}
 
 	@Override
-	public Integer deleteOrderByEmployeeId(Integer employeeId) {
+	public Integer deleteOrdersByEmployeeId(Integer employeeId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer deleteOrderByCustomerId(Integer customerId) {
+	public Integer deleteOrdersByCustomerId(Integer customerId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
