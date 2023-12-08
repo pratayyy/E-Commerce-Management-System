@@ -103,8 +103,27 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public List<Order> getOrdersByEmployeeId(Integer employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> orders = null;
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			orders = session.createCriteria(Order.class).add(Restrictions.eq("employee.id", employeeId))
+					.add(Restrictions.eq("isDeleted", -1)).list();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return orders;
 	}
 
 	@Override
