@@ -10,7 +10,10 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
 import com.ecom.dao.OrderDao;
+import com.ecom.pojo.Customer;
+import com.ecom.pojo.Employee;
 import com.ecom.pojo.Order;
+import com.ecom.pojo.Shipper;
 
 /**
  * @author pratay.roy
@@ -21,6 +24,7 @@ public class OrderDaoImpl implements OrderDao {
 	private Transaction transaction;
 	private Configuration configuration;
 	private String errorMessage;
+	private Integer result = 0;
 
 	public OrderDaoImpl() {
 		configuration = new Configuration();
@@ -153,14 +157,77 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Integer addNewOrder(Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		Customer customer = new Customer();
+		Employee employee = new Employee();
+		Shipper shipper = new Shipper();
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			if (order.getCustomer() != null)
+				customer = (Customer) session.get(Customer.class, order.getCustomer().getPkCustomerId());
+			if (order.getEmployee() != null)
+				employee = (Employee) session.get(Employee.class, order.getEmployee().getPkEmployeeId());
+			if (order.getShipper() != null)
+				shipper = (Shipper) session.get(Shipper.class, order.getShipper().getPkShipperId());
+			order.setCustomer(customer);
+			order.setEmployee(employee);
+			order.setShipper(shipper);
+			order.setIsDeleted(-1);
+			session.save(order);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
-	public Integer addNewOrders(List<Order> order) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer addNewOrders(List<Order> orders) {
+		Customer customer = new Customer();
+		Employee employee = new Employee();
+		Shipper shipper = new Shipper();
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			for (Order order : orders) {
+				if (order.getCustomer() != null)
+					customer = (Customer) session.get(Customer.class, order.getCustomer().getPkCustomerId());
+				if (order.getEmployee() != null)
+					employee = (Employee) session.get(Employee.class, order.getEmployee().getPkEmployeeId());
+				if (order.getShipper() != null)
+					shipper = (Shipper) session.get(Shipper.class, order.getShipper().getPkShipperId());
+				order.setCustomer(customer);
+				order.setEmployee(employee);
+				order.setShipper(shipper);
+				session.save(order);
+				result += 1;
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override

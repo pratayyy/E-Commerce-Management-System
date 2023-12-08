@@ -103,14 +103,32 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public Integer addNewOrder(Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		if (order == null) {
+			statusCode = 400;
+			errorMessage = "Order details empty";
+			return null;
+		}
+		Integer result = orderDao.addNewOrder(order);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong";
+		}
+		return result;
 	}
 
 	@Override
-	public Integer addNewOrders(List<Order> order) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer addNewOrders(List<Order> orders) {
+		if (orders.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "Orders list empty";
+			return null;
+		}
+		Integer result = orderDao.addNewOrders(orders);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong";
+		}
+		return result;
 	}
 
 	@Override
