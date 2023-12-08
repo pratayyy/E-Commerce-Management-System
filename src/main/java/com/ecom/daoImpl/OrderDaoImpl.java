@@ -1,6 +1,7 @@
 package com.ecom.daoImpl;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -211,6 +212,7 @@ public class OrderDaoImpl implements OrderDao {
 				order.setCustomer(customer);
 				order.setEmployee(employee);
 				order.setShipper(shipper);
+				order.setIsDeleted(-1);
 				session.save(order);
 				result += 1;
 			}
@@ -232,14 +234,92 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Integer updateOrderByOrderId(Integer orderId, Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		Order currentOrder = new Order();
+		Customer customer = new Customer();
+		Employee employee = new Employee();
+		Shipper shipper = new Shipper();
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			if (order.getCustomer() != null)
+				customer = (Customer) session.get(Customer.class, order.getCustomer().getPkCustomerId());
+			if (order.getEmployee() != null)
+				employee = (Employee) session.get(Employee.class, order.getEmployee().getPkEmployeeId());
+			if (order.getShipper() != null)
+				shipper = (Shipper) session.get(Shipper.class, order.getShipper().getPkShipperId());
+			currentOrder = (Order) session.createCriteria(Order.class).add(Restrictions.eq("isDeleted", -1))
+					.uniqueResult();
+			if (customer != null)
+				currentOrder.setCustomer(customer);
+			if (employee != null)
+				currentOrder.setEmployee(employee);
+			if (shipper != null)
+				currentOrder.setShipper(shipper);
+			if (order.getOrderDate() != null)
+				currentOrder.setOrderDate(order.getOrderDate());
+			session.update(currentOrder);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public Integer updateOrdersByShipperId(Integer shipperId, Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> currentOrders = new ArrayList<Order>();
+		Customer customer = new Customer();
+		Employee employee = new Employee();
+		Shipper shipper = new Shipper();
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			if (order.getCustomer() != null)
+				customer = (Customer) session.get(Customer.class, order.getCustomer().getPkCustomerId());
+			if (order.getEmployee() != null)
+				employee = (Employee) session.get(Employee.class, order.getEmployee().getPkEmployeeId());
+			if (order.getShipper() != null)
+				shipper = (Shipper) session.get(Shipper.class, order.getShipper().getPkShipperId());
+			currentOrders = session.createCriteria(Order.class).add(Restrictions.eq("isDeleted", -1))
+					.add(Restrictions.eq("shipper.id", shipperId)).list();
+			for (Order currentOrder : currentOrders) {
+				if (customer != null)
+					currentOrder.setCustomer(customer);
+				if (employee != null)
+					currentOrder.setEmployee(employee);
+				if (shipper != null)
+					currentOrder.setShipper(shipper);
+				if (order.getOrderDate() != null)
+					currentOrder.setOrderDate(order.getOrderDate());
+				session.update(currentOrder);
+				result += 1;
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override

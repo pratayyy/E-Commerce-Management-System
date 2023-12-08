@@ -133,14 +133,46 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public Integer updateOrderByOrderId(Integer orderId, Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		if (orderId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Order Id";
+			return null;
+		}
+		if (order == null) {
+			statusCode = 400;
+			errorMessage = "Order details empty";
+			return null;
+		}
+		if (orderDao.getOrderByOrderId(orderId) == null) {
+			statusCode = 404;
+			errorMessage = "Order with given Order Id doesnot exist";
+		}
+		Integer result = orderDao.updateOrderByOrderId(orderId, order);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong while updating";
+		}
+		return result;
 	}
 
 	@Override
 	public Integer updateOrdersByShipperId(Integer shipperId, Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		if (shipperId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Order Id";
+			return null;
+		}
+		if (order == null) {
+			statusCode = 400;
+			errorMessage = "Order details empty";
+			return null;
+		}
+		Integer result = orderDao.updateOrdersByShipperId(shipperId, order);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong while updating";
+		}
+		return result;
 	}
 
 	@Override
