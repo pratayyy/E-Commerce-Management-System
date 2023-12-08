@@ -18,6 +18,7 @@ import com.ecom.pojo.Shipper;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public class OrderDaoImpl implements OrderDao {
 	private SessionFactory sessionFactory;

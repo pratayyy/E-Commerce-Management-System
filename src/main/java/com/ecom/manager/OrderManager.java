@@ -8,6 +8,7 @@ import com.ecom.pojo.Order;
 
 /**
  * @author pratay.roy
+ * @version 0.0.1
  */
 public interface OrderManager {
 	/**
