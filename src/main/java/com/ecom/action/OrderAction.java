@@ -1,5 +1,6 @@
 package com.ecom.action;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class OrderAction {
 	private Integer customerId;
 	private Integer employeeId;
 	private Integer shipperId;
-	private String orderDate;
+	private Date orderDate;
 	private Order order;
 	private List<Order> orders;
 	private Map<String, Object> root;
@@ -59,11 +60,11 @@ public class OrderAction {
 		this.shipperId = shipperId;
 	}
 
-	public String getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(String orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 

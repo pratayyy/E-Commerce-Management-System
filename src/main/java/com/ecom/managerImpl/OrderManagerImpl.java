@@ -1,5 +1,6 @@
 package com.ecom.managerImpl;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,9 +86,19 @@ public class OrderManagerImpl implements OrderManager {
 	}
 
 	@Override
-	public List<OrderDto> getOrdersByOrderDate(String orderDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OrderDto> getOrdersByOrderDate(Date orderDate) {
+		if (orderDate == null) {
+			statusCode = 400;
+			errorMessage = "Invalid Order Date";
+			return null;
+		}
+		List<Order> orders = orderDao.getOrdersByOrderDate(orderDate);
+		if (orders.isEmpty()) {
+			statusCode = 404;
+			errorMessage = "Orders with given Order Date doesnot exist";
+		}
+		return orders.isEmpty() ? null
+				: orders.stream().map(order -> Mapper.orderDtoMpper(order)).collect(Collectors.toList());
 	}
 
 	@Override

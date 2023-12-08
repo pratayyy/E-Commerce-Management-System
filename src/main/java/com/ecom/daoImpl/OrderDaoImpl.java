@@ -1,5 +1,6 @@
 package com.ecom.daoImpl;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -7,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 
 import com.ecom.dao.OrderDao;
 import com.ecom.pojo.Order;
@@ -127,9 +127,28 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<Order> getOrdersByOrderDate(String orderDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getOrdersByOrderDate(Date orderDate) {
+		List<Order> orders = null;
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			orders = session.createCriteria(Order.class).add(Restrictions.eq("orderDate", orderDate))
+					.add(Restrictions.eq("isDeleted", -1)).list();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.clear();
+				sessionFactory.close();
+			}
+		}
+		return orders;
 	}
 
 	@Override

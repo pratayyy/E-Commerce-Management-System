@@ -1,5 +1,6 @@
 package com.ecom.manager;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.ecom.dto.OrderDto;
@@ -46,7 +47,7 @@ public interface OrderManager {
 	 * @param orderDate
 	 * @return list of orders
 	 */
-	public List<OrderDto> getOrdersByOrderDate(String orderDate);
+	public List<OrderDto> getOrdersByOrderDate(Date orderDate);
 
 	/**
 	 * Method to add a new order

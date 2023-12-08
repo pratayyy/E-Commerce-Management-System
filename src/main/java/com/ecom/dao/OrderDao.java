@@ -1,5 +1,6 @@
 package com.ecom.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.ecom.pojo.Order;
@@ -45,7 +46,7 @@ public interface OrderDao {
 	 * @param orderDate
 	 * @return list of orders
 	 */
-	public List<Order> getOrdersByOrderDate(String orderDate);
+	public List<Order> getOrdersByOrderDate(Date orderDate);
 
 	/**
 	 * Method to add a new order
