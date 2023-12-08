@@ -30,7 +30,7 @@ public class OrderManagerImpl implements OrderManager {
 	public List<OrderDto> getAllOrders() {
 		List<Order> orders = orderDao.getAllOrders();
 		if (orders.isEmpty()) {
-			statusCode = 400;
+			statusCode = 404;
 			errorMessage = "Orders doesnot exist";
 		}
 		return orders.isEmpty() ? null
@@ -39,8 +39,17 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public OrderDto getOrderByOrderId(Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (orderId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Order Id";
+			return null;
+		}
+		Order order = orderDao.getOrderByOrderId(orderId);
+		if (order == null) {
+			statusCode = 404;
+			errorMessage = "Order with given Order Id doesnot exist";
+		}
+		return order == null ? null : Mapper.orderDtoMpper(order);
 	}
 
 	@Override

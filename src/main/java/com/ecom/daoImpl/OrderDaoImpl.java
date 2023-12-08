@@ -34,7 +34,8 @@ public class OrderDaoImpl implements OrderDao {
 			sessionFactory = configuration.buildSessionFactory();
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			orders = session.createCriteria(Order.class, "order").add(Restrictions.eq("order.isDeleted", -1)).list();
+			orders = session.createCriteria(Order.class).add(Restrictions.eq("isDeleted", -1)).list();
+			transaction.commit();
 		} catch (Exception e) {
 			if (transaction != null) {
 				transaction.rollback();
@@ -52,8 +53,27 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Order getOrderByOrderId(Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		Order order = null;
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			order = (Order) session.createCriteria(Order.class).add(Restrictions.eq("pkOrderId", orderId))
+					.add(Restrictions.eq("isDeleted", -1)).uniqueResult();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.clear();
+				sessionFactory.close();
+			}
+		}
+		return order;
 	}
 
 	@Override
