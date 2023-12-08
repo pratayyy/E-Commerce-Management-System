@@ -54,8 +54,18 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public List<OrderDto> getOrdersByCustomerId(Integer customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (customerId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Customer Id";
+			return null;
+		}
+		List<Order> orders = orderDao.getOrdersByCustomerId(customerId);
+		if (orders.isEmpty()) {
+			statusCode = 404;
+			errorMessage = "Orders with given Customer Id doesnot exist";
+		}
+		return orders.isEmpty() ? null
+				: orders.stream().map(order -> Mapper.orderDtoMpper(order)).collect(Collectors.toList());
 	}
 
 	@Override
