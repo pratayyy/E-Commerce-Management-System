@@ -159,7 +159,7 @@ public class OrderManagerImpl implements OrderManager {
 	public Integer updateOrdersByShipperId(Integer shipperId, Order order) {
 		if (shipperId <= 0) {
 			statusCode = 400;
-			errorMessage = "Invalid Order Id";
+			errorMessage = "Invalid Shipper Id";
 			return null;
 		}
 		if (order == null) {
@@ -177,20 +177,62 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public Integer deleteOrderByOrderId(Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (orderId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Order Id";
+			return null;
+		}
+		if (orderDao.getOrderByOrderId(orderId) == null) {
+			statusCode = 404;
+			errorMessage = "Order with given Order Id doesnot exist";
+			return null;
+		}
+		Integer result = orderDao.deleteOrderByOrderId(orderId);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong while deleting";
+		}
+		return result;
 	}
 
 	@Override
 	public Integer deleteOrdersByEmployeeId(Integer employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (employeeId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Employee Id";
+			return null;
+		}
+		if (orderDao.getOrdersByEmployeeId(employeeId).isEmpty()) {
+			statusCode = 404;
+			errorMessage = "Orders with given Employee Id doesnot exist";
+			return null;
+		}
+		Integer result = orderDao.deleteOrdersByEmployeeId(employeeId);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong while deleting";
+		}
+		return result;
 	}
 
 	@Override
 	public Integer deleteOrdersByCustomerId(Integer customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		if (customerId <= 0) {
+			statusCode = 400;
+			errorMessage = "Invalid Customer Id";
+			return null;
+		}
+		if (orderDao.getOrdersByCustomerId(customerId).isEmpty()) {
+			statusCode = 404;
+			errorMessage = "Orders with given Customer Id doesnot exist";
+			return null;
+		}
+		Integer result = orderDao.deleteOrdersByCustomerId(customerId);
+		if (result == 0) {
+			statusCode = 404;
+			errorMessage = "Something went wrong while deleting";
+		}
+		return result;
 	}
 
 	@Override

@@ -324,20 +324,97 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Integer deleteOrderByOrderId(Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		Order order = new Order();
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			order = (Order) session.createCriteria(Order.class).add(Restrictions.eq("pkOrderId", orderId))
+					.add(Restrictions.eq("isDeleted", -1)).uniqueResult();
+			if (order != null)
+				order.setIsDeleted(1);
+			session.update(order);
+			transaction.commit();
+			result = 1;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public Integer deleteOrdersByEmployeeId(Integer employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			orders = session.createCriteria(Order.class).add(Restrictions.eq("employee.id", employeeId))
+					.add(Restrictions.eq("isDeleted", -1)).list();
+			if (!orders.isEmpty()) {
+				for (Order order : orders) {
+					if (order != null)
+						order.setIsDeleted(1);
+					session.update(order);
+					result += 1;
+				}
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
 	public Integer deleteOrdersByCustomerId(Integer customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> orders = new ArrayList<Order>();
+		try {
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			orders = session.createCriteria(Order.class).add(Restrictions.eq("customer.id", customerId))
+					.add(Restrictions.eq("isDeleted", -1)).list();
+			if (!orders.isEmpty()) {
+				for (Order order : orders) {
+					if (order != null)
+						order.setIsDeleted(1);
+					session.update(order);
+					result += 1;
+				}
+			}
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			errorMessage = e.getMessage();
+			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.close();
+				sessionFactory.close();
+			}
+		}
+		return result;
 	}
 
 	@Override
