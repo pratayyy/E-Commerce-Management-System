@@ -1,11 +1,13 @@
 package com.ecom.managerImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.ecom.dao.OrderDao;
 import com.ecom.dto.OrderDto;
 import com.ecom.manager.OrderManager;
 import com.ecom.pojo.Order;
+import com.ecom.util.Mapper;
 
 /**
  * @author pratay.roy
@@ -26,8 +28,13 @@ public class OrderManagerImpl implements OrderManager {
 
 	@Override
 	public List<OrderDto> getAllOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> orders = orderDao.getAllOrders();
+		if (orders.isEmpty()) {
+			statusCode = 400;
+			errorMessage = "Orders doesnot exist";
+		}
+		return orders.isEmpty() ? null
+				: orders.stream().map(order -> Mapper.orderDtoMpper(order)).collect(Collectors.toList());
 	}
 
 	@Override
